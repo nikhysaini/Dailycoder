@@ -19,6 +19,12 @@ const userschema = new mongoose.Schema({
    role:{
      type : String,enum:['user','admin'],default:'user'
    },
+   institution:{
+     type : String
+   },
+   about:{
+     type : String
+   },
    problemsolved:{
      type : [String]
    }

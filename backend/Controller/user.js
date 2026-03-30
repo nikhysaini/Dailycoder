@@ -75,20 +75,44 @@ const logout = async(req,res)=>{
     }
 }
 
-const get = async(req,res)=>{
+const editprofile = async(req,res)=>{
   try{
- const token = req.headers.token;
-  const tokenexists = await redisclient.exists(`token:${token}`);
-  if(!tokenexists)
-  {
-    const verify = jwt.verify(token,process.env.JWT_TOKEN_KEY)
-    if(verify)
-     res.status(200).send("Token verify");
-    else 
-      throw new Error("login please")
+   const token = req.headers.token;
+   const {firstname,lastname,about,institution, age} = req.body;
+   const verify = jwt.verify(token,process.env.JWT_TOKEN_KEY)
+   if(verify)
+   {
+     const update = await user.findOne({email:verify.email});
+     update.firstname = firstname ;
+     update.lastname = lastname ;
+     update.institution = institution;
+     update.about = about;
+     update.age = age;
+     await update.save();
+     res.status(200).json({"message":"update successfully"});
+   }
+   else 
+    res.status(400).json({"message":"something is wrong"});
   }
-  else
-     throw new Error("login please")
+  catch(e){
+   res.status(404).send(e.message);
+  }
+}
+
+const getprofile = async(req,res)=>{
+  try{
+   const token = req.headers.token;
+   const verify = jwt.verify(token,process.env.JWT_TOKEN_KEY)
+   if(verify)
+   {
+     const update = await user.findOne({email:verify.email});
+    
+     res.status(200).json({"user":{"email":update.email,"firstname":update.firstname,"lastname":update.lastname,
+     "age":update.age , "about":update.about , "institution":update.institution
+   }});
+   }
+   else 
+    res.status(400).json({"message":"something is wrong"});
   }
   catch(e){
    res.status(404).send(e.message);
@@ -113,4 +137,4 @@ const deleteprofile = async(req,res)=>{
    res.status(404).send(e.message);
   }
 }
-module.exports = { register,deleteprofile,login,logout,get}
+module.exports = { register,deleteprofile,login,logout,editprofile,getprofile}

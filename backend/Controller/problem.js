@@ -59,13 +59,12 @@ const {title,description,difficulty,tags,
 }
 
 const updateProblem = async (req,res)=>{
-    
+ 
   const {id} = req.params;
   const {title,description,difficulty,tags,
-    visibleTestCases,hiddenTestCases,startCode,
-    referenceSolution, problemCreator
+    visibleTestCases,hiddenTestCases,
    } = req.body;
-
+   console.log(id,title);  
   try{
 
      if(!id){
@@ -74,42 +73,9 @@ const updateProblem = async (req,res)=>{
 
     const DsaProblem =  await Problem.findById(id);
     if(!DsaProblem)
-    {
-      return res.status(404).send("ID is not persent in server");
-    }
-    for(const {language,completeCode} of referenceSolution){
-    
-    const languageId = getLanguageById(language);
-    
-      const submissions = visibleTestCases.map((testcase)=>({
-            source_code:completeCode,
-            language_id: languageId,
-            stdin: testcase.input,
-            expected_output: testcase.output
-        }));
-
-
-       
-       const submitResult = await submitBatch(submissions);
-
-       const resultToken = submitResult.map((value)=> value.token);
-
-       const testResult = await submitToken(resultToken);
-
-
-       for(const test of testResult){
-        if(test.status_id!=3){
-         console.log(test.status_id);
-         if(test.status_id==4) return res.status(400).send("Wrong Answer");
-         if(test.status_id==5) return res.status(400).send("Time Limit Exceeded");
-         if(test.status_id==6) return res.status(400).send("Compilation Error");
-         if(test.status_id=7) return res.status(400).send("Runtime Error (SIGSEGV)");
-        }
-       }
-    
-    }  
-
-  const newProblem = await Problem.findByIdAndUpdate(id , {...req.body}, {runValidators:true, new:true});
+    { return res.status(404).send("ID is not persent in server"); }
+   
+  const newProblem = await Problem.findByIdAndUpdate(id , {...req.body},);
    
   res.status(200).send(newProblem);
   }

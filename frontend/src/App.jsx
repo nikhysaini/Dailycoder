@@ -5,7 +5,10 @@ import Login from "./page/login";
 import Signup from "./page/signup";
 import Solve from "./page/solve";
 import Profile from "./page/profile";
+import EditProfile from "./page/editprofile"
 import Problem from "./page/problem";
+import Compete from "./page/compete"
+import Interview from "./page/interview"
 import Navbar from "./component/nav";
 import Admin from "./adminpanel/admin"
 import AdminCreate from "./adminpanel/create"
@@ -20,6 +23,9 @@ function App() {
     <Routes >
     <Route path='/' element={<Home></Home>}> </Route>
     <Route path='/profile' element={<Profile></Profile>}> </Route>
+    <Route path='/compete' element={<Compete></Compete>}> </Route>
+    <Route path='/interview' element={<Interview></Interview>}> </Route>
+    <Route path='/editprofile' element={<EditProfile></EditProfile>}> </Route>
     <Route path='/solve/:id' element={<Solve></Solve>}> </Route>
     <Route path='/problem' element={<Problem></Problem>}> </Route>
     <Route path='/login' element={<Login></Login>}> </Route>
