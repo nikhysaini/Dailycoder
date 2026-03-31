@@ -8,7 +8,10 @@ const { Server } = require("socket.io");
 const server = http.createServer(app);        
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+    "http://localhost:5173",
+    "https://dailycoder.vercel.app/"
+  ],
         credentials: true
   }
 });
@@ -25,7 +28,13 @@ const jwt = require('jsonwebtoken');
 const redisclient = require('./model/redis.js')
 
 app.use(express.json());
-app.use(cors({origin: "http://localhost:5173",credentials: true}));
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://dailycoder.vercel.app/"
+  ],
+  credentials: true
+}));
 app.use(cookieParser())
 
 
