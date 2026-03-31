@@ -8,7 +8,7 @@ import { MdFullscreen } from "react-icons/md";
 import {IoSend,IoCheckmark,IoClose,IoRemove,IoExpand} from "react-icons/io5";
 import { useParams } from "react-router-dom";
 
-const socket = io("http://localhost:3000");
+const socket = io("https://dailycoder.onrender.com");
 
 export default function Compete() {
   const [roomId, setRoomId] = useState("");

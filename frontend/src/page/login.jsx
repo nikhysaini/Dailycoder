@@ -13,7 +13,7 @@ export default function Login() {
     
     console.log({email, password });
     async function api() {
-     const response = await fetch("http://localhost:3000/user/login", {
+     const response = await fetch("https://dailycoder.onrender.com/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

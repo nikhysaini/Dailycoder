@@ -11,7 +11,7 @@ export default function Navbar() {
 
   const logout = async()=>{
    try{
-     const response = await fetch("http://localhost:3000/user/logout", {
+     const response = await fetch("https://dailycoder.onrender.com/user/logout", {
       method: "GET",
       headers: { "Content-Type": "application/json","token":auth.token},
        credentials: "include"

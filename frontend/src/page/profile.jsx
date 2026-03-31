@@ -41,7 +41,7 @@ export default function Profile() {
   useEffect(() => { 
     //  console.log(auth);
       async function api() {
-         const response = await fetch(`http://localhost:3000/user/getprofile`,{
+         const response = await fetch(`https://dailycoder.onrender.com/user/getprofile`,{
          method: "GET",
          headers: {
            "Content-Type": "application/json",
