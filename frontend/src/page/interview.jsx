@@ -15,7 +15,7 @@ export default function Interview() {
   const bottomRef = useRef(null);
 
   const questions = [
-    "Welcome to the interview.Welcome to the interview.",
+    "Welcome to the interview.Tell me about yourself",
     "Why do you want to work with our company?",
     "Tell me about a difficult technical challenge you solved."
   ];
@@ -197,7 +197,7 @@ export default function Interview() {
       </div>
 
       {/* Answers bottom */}
-      <div className="flex flex-col-reverse mt-[7.25%] mx-auto rounded-lg text-center mt-2 max-h-50 min-h-13 text-black overflow-y-auto bg-gray-200/25 border-2  border-gray-200 w-[75%] pt-1">
+      <div className="flex shadow-xl flex-col-reverse mt-[7.25%] mx-auto rounded-lg text-center mt-2 max-h-50 min-h-13 text-black overflow-y-auto bg-gray-200/25 border-2  border-gray-200 w-[75%] pt-1">
 
         {[...chat].reverse().map((ans, i) => (
           <div key={i} className="flex mb-2 p-1 ">

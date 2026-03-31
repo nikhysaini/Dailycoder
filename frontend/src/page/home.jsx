@@ -7,7 +7,7 @@ export default function Home() {
 
 return (<div className="">
 
- <div className="bg-gray-300/30 hover:bg-white/15 mx-15 rounded transform transition grid lg:grid-cols-2 sm:grid-cols-1 gap-2 text-center mt-10 p-10 py-30">
+ <div className="bg-gray-200/80 hover:bg-white/15 shadow-xl mx-15 rounded transform transition grid lg:grid-cols-2 sm:grid-cols-1 gap-2 gap-y-7 text-center p-10 py-30">
   
    <div className="">
      <div className="text-5xl text-left ml-3 font-serif text-red-400/50">One <span className="text-blue-600">Problem</span> a day</div>
@@ -19,7 +19,7 @@ return (<div className="">
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="w-[550px] rounded-2xl overflow-hidden shadow-2xl border border-gray-700"
+      className="lg:w-[75%] md:w-[70%] sm:w-full rounded-2xl overflow-hidden shadow-9xl border border-gray-700"
     >
       {/* Top Bar */}
       <div className="flex items-center justify-between bg-gray-800 px-4 py-2">

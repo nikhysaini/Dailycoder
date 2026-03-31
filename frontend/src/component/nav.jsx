@@ -8,10 +8,29 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const auth = JSON.parse(localStorage.getItem("auth")) || null;
-  const logout = ()=>{
-   localStorage.removeItem("auth");
-   navigate("/");
+
+  const logout = async()=>{
+   try{
+     const response = await fetch("http://localhost:3000/user/logout", {
+      method: "GET",
+      headers: { "Content-Type": "application/json","token":auth.token},
+       credentials: "include"
+    })
+    const data = await response.json();
+    console.log(response);
+   if(!response.ok) throw new Error(data.message || "Logout failed");
+   else
+   {
+    localStorage.removeItem("auth");
+    navigate("/");
+    alert("Logout successfully");
+   }
+      
   }
+  catch(e)
+  {console.log(e);}
+  }
+
   return (
     <>
       <nav className="bg-white shadow-md px-8 py-2.5 flex items-center justify-between">

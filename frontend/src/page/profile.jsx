@@ -75,7 +75,7 @@ export default function Profile() {
          <span className="bg-gray-950 border border-gray-700 text-white p-3"><p className="text-center">Total Days</p> <p className="text-3xl font-bold text-center">20</p></span>
          <span className="bg-gray-950 border border-gray-700 text-white p-3"><p className="text-center">Rank</p> <p className="text-3xl font-bold text-center">1</p></span>
         </div>
-      <div className="bg-gray-950 border border-gray-800 grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-3 p-[1.5%] pt-[3%] mt-[3%]">
+      <div className="bg-gray-950 border shadow-xl border-gray-800 grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-3 p-[1.5%] pt-[3%] mt-[3%]">
         <div >
           <Chart options={options} series={series} type="donut" height={260} />
         </div>
