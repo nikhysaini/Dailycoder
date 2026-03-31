@@ -10,7 +10,8 @@ const io = new Server(server, {
   cors: {
     origin: [
     "http://localhost:5173",
-    "https://dailycoder.vercel.app/"
+    "https://dailycoder.vercel.app",
+    "https://dailycoder-1.onrender.com"
   ],
         credentials: true
   }
@@ -31,7 +32,8 @@ app.use(express.json());
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://dailycoder.vercel.app/"
+     "https://dailycoder.vercel.app",
+    "https://dailycoder-1.onrender.com"
   ],
   credentials: true
 }));
