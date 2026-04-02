@@ -46,7 +46,7 @@ export default function Navbar() {
           {auth===null && <Link to="/" className="font-bold hover:text-blue-600">Home</Link>}
           {auth!=null && auth.role!="admin" && <Link to="/" className="font-bold hover:text-blue-600">Home</Link>}
           <Link to="/problem" className="font-bold hover:text-blue-600">Problems</Link>
-          <Link to="/compete" className="font-bold hover:text-blue-600">Compete</Link>
+          <Link to= { auth!=null ? "/compete" : "/login" } className="font-bold hover:text-blue-600">Compete</Link>
           <Link to="interview" className="font-bold hover:text-blue-600">Interview</Link>
         </div>
 
