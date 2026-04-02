@@ -40,8 +40,8 @@ export default function Profile() {
 
   useEffect(() => { 
     //  console.log(auth);
-      async function api() {
-         const response = await fetch(`https://dailycoder.onrender.com/user/getprofile`,{
+      async function api() { 
+         const response = await fetch(`${import.meta.env.BACKEND_URL}/user/getprofile`,{
          method: "GET",
          headers: {
            "Content-Type": "application/json",

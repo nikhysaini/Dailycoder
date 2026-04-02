@@ -41,7 +41,7 @@ export default function EditProfile() {
     
 
     async function api() {
-     const response = await fetch("http://localhost:3000/user/editprofile", {
+     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/editprofile`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
