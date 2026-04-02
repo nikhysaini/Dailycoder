@@ -97,8 +97,11 @@ export default function Interview() {
           await sleep(1800);
     
       }
-      setCameraOn(false);
+      
       await speakQuestion("Interview completed. Thank you!");
+      
+      setCameraOn(false);
+      turnOffCamera();
 
     } catch (err) {
       console.log("Error:", err);
@@ -118,6 +121,14 @@ export default function Interview() {
       setCameraOn(false);
     }
   };
+
+  function turnOffCamera() {
+  if (window.currentStream) {
+    window.currentStream.getTracks().forEach(track => track.stop());
+    window.currentStream = null;
+    console.log('Camera turned off');
+  }
+  }
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
