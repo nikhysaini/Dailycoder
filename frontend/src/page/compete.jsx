@@ -8,7 +8,7 @@ import { MdFullscreen } from "react-icons/md";
 import {IoSend,IoCheckmark,IoClose,IoRemove,IoExpand} from "react-icons/io5";
 import { useParams } from "react-router-dom";
 
-const socket = io("https://dailycoder.onrender.com");
+const socket = io(`${import.meta.env.VITE_BACKEND_URL}`);
 
 export default function Compete() {
   const [roomId, setRoomId] = useState("");
@@ -163,7 +163,7 @@ export default function Compete() {
 
   useEffect(() => { 
     async function api() {
-        const response = await fetch(`http://localhost:3000/problem/problemById/${"698f6f74ce0bdfd0c9616a72"}`,{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${"698f6f74ce0bdfd0c9616a72"}`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -185,7 +185,7 @@ export default function Compete() {
         if(language==="python") lang = "Python";
         else if(language==="javascript") lang = "Javascript";
         else if(language==="java") lang = "Java";
-       const response = await fetch(`http://localhost:3000/submission/run/${"698f6f74ce0bdfd0c9616a72"}`, {
+       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/run/${"698f6f74ce0bdfd0c9616a72"}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -225,7 +225,7 @@ export default function Compete() {
         if(language==="python") lang = "Python";
         else if(language==="javascript") lang = "Javascript";
         else if(language==="java") lang = "Java";
-       const response = await fetch(`http://localhost:3000/submission/submit/${"698f6f74ce0bdfd0c9616a72"}`, {
+       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/submit/${"698f6f74ce0bdfd0c9616a72"}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

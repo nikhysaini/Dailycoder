@@ -7,7 +7,7 @@ export default function AdminUpdateFurther() {
 
    useEffect(() => { 
     async function api() {
-        const response = await fetch(`http://localhost:3000/problem/problemById/${"698f6f74ce0bdfd0c9616a72"}`,{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${"698f6f74ce0bdfd0c9616a72"}`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const { name, value } = e.target;
 
   const handleSubmit = async(e) => {
      async function api() {
-        const response = await fetch(`http://localhost:3000/problem/update/${"698f6f74ce0bdfd0c9616a72"}`,{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/update/${"698f6f74ce0bdfd0c9616a72"}`,{
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

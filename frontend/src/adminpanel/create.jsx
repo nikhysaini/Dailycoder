@@ -19,7 +19,7 @@ export default function AdminCreate() {
   }
   const handleSubmit = async(e) => {
    async function api() {
-        const response = await fetch(`http://localhost:3000/problem/create`,{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/create`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",

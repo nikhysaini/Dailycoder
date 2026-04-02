@@ -13,7 +13,7 @@ export default function Login() {
     
     console.log({email, password });
     async function api() {
-     const response = await fetch("https://dailycoder.onrender.com/user/login", {
+     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

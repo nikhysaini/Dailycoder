@@ -13,7 +13,7 @@ const [search, setSearch] = useState("");
 
   const DeleteProblem = async(id) => { 
   console.log(id);
-  const response = await fetch(`http://localhost:3000/problem/delete/${id}`, {
+  const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/delete/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
