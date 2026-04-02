@@ -10,6 +10,7 @@ export default function Interview() {
   const [cameraOn, setCameraOn] = useState(false);
 
   const recognitionRef = useRef(null);
+  const streamRef = useRef(null);
   const stopRef = useRef(false);
   const videoRef = useRef(null);
   const bottomRef = useRef(null);
@@ -109,27 +110,32 @@ export default function Interview() {
   };
 
   const startCamera = async () => {
-    try {
-      setCameraOn(true);
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
-    } catch (err) {
-      console.log("Camera error:", err);
-      setCameraOn(false);
-    }
-  };
+  try {
+    setCameraOn(true);
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    streamRef.current = stream;
+    if (videoRef.current)videoRef.current.srcObject = stream;
+  } catch (err) {
+    console.log("Camera error:", err);
+    setCameraOn(false);
+  }
+};
 
   const stopCamera = () => {
   if (streamRef.current) {
     streamRef.current.getTracks().forEach(track => track.stop());
     streamRef.current = null;
-    if (videoRef.current)  videoRef.current.srcObject = null;
+    if (videoRef.current) 
+      videoRef.current.srcObject = null;
     setCameraOn(false);
   }
 };
+
+ useEffect(() => {
+  return () => {
+    stopCamera(); 
+  };}, []);
+
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -221,9 +227,6 @@ export default function Interview() {
       
         
       </div>
-
-      
-
     </div>
   );
 }
