@@ -43,8 +43,8 @@ export default function Navbar() {
         {/* Navigation Links */}
         <div className="hidden md:flex  space-x-8 text-gray-700 font-bold">
           {auth!=null && auth.role==="admin" && <Link to="/admin" className="font-bold hover:text-blue-600">Admin Panel</Link>}
-          {auth===null && <Link href="/" className="font-bold hover:text-blue-600">Home</Link>}
-          {auth!=null && auth.role!="admin" && <Link href="/" className="font-bold hover:text-blue-600">Home</Link>}
+          {auth===null && <Link to="/" className="font-bold hover:text-blue-600">Home</Link>}
+          {auth!=null && auth.role!="admin" && <Link to="/" className="font-bold hover:text-blue-600">Home</Link>}
           <Link to="/problem" className="font-bold hover:text-blue-600">Problems</Link>
           <Link to="/compete" className="font-bold hover:text-blue-600">Compete</Link>
           <Link to="interview" className="font-bold hover:text-blue-600">Interview</Link>
