@@ -7,10 +7,13 @@ import { FiLogOut } from "react-icons/fi";
 import { MdFullscreen } from "react-icons/md";
 import {IoSend,IoCheckmark,IoClose,IoRemove,IoExpand} from "react-icons/io5";
 import { useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
+import { set } from "zod";
 
 const socket = io(`${import.meta.env.VITE_BACKEND_URL}`);
 
 export default function Compete() {
+  const [loading, setLoading] = useState(null);
   const [roomId, setRoomId] = useState("");
   const [problemtitle, setproblemtitle] = useState(null);
   const [problemId, setproblemId] = useState(null);
@@ -40,30 +43,33 @@ export default function Compete() {
     const [tab, setTab] = useState(0);
 
 
-  useEffect(() => {
-
-  socket.on("leaderboard_update", (data) => {
+ useEffect(() => {
+  const handleLeaderboard = (data) => {
     setBoard(data);
-  });
+  };
 
-    socket.on("receive_message", (data) => {
-      setMessages((prev) => [...prev, data]);
-    });
+  const handleMessage = (data) => {
+    setMessages((prev) => [...prev, data]);
+  };
 
-    return () => {
-      socket.off("receive_message");
-    };
-  }, []);
+  socket.on("leaderboard_update", handleLeaderboard);
+  socket.on("receive_message", handleMessage);
+
+  return () => {
+    socket.off("leaderboard_update", handleLeaderboard);
+    socket.off("receive_message", handleMessage);
+  };
+}, []);
 
   const joinRoom = () => {  
-   
+    setLoading("Loading")
     if (!roomId) return;
     console.log(roomId);
     socket.emit("check_room",  roomId );
     
     socket.on("room_exists", ({ exists }) => {
     if (!exists) 
-       { alert("Contest doesn't exists") ; return ; }
+       { alert("Contest doesn't exists") ;setLoading(null);  return ; }
     else 
       {
         socket.emit("join_room", { 
@@ -73,23 +79,25 @@ export default function Compete() {
         
       }
    });
+  
     socket.on("join_results", (data) => {
 
     if (data.status === "accepted") 
-       { setJoined(true); setproblemId(data.problemid);update();}
+       { setJoined(true); setproblemId(data.problemid);update(); setLoading(null);}
     else 
-      alert("problem doesn't Exists");
+      {setLoading(null);alert("problem doesn't Exists");}
   });
   };
 
    const createRoom = () => {  
+    setLoading("Loading");
     if (!roomId) return;
     console.log(roomId);
     socket.emit("check_room",  roomId );
     
     socket.on("room_exists", ({ exists }) => {
     if (exists) 
-       {alert("Contest already exists") ;return ; }
+       {alert("Contest already exists") ;setLoading(null);return ; }
     else 
       {
         socket.emit("create_room", { 
@@ -103,19 +111,21 @@ export default function Compete() {
    socket.on("join_results", (data) => {
 
     if (data.status === "accepted") 
-        { setJoined(true); setproblemId(data.problemid);}
+        { setJoined(true); setproblemId(data.problemid);setLoading(null);}
     else 
-      alert("problem doesn't Exists");
+      {alert("problem doesn't Exists");setLoading(null);}
   });
   };
 
   const leaveRoom = () => {
+  setLoading("Loading");
   socket.emit("leave_room", { roomId,user:auth?.email });
 
    setJoined(false);
    setMessages([]);
    setRoomId("");
    setBoard([]);
+   setLoading(null);
    };
 
   const sendMessage = () => {
@@ -133,6 +143,7 @@ export default function Compete() {
   };
 
   const solve = async() =>{
+     setLoading("Loading");
      console.log("Leaderboard called");
       socket.emit("add_point", {
       roomId,
@@ -141,14 +152,15 @@ export default function Compete() {
      });
      console.log("again")
      socket.on("leaderboard_update", (data1) => {
-      console.log("called ld");
-      console.log(data1);
-      setBoard(data1);
-      });
-      
+     console.log("called ld");
+     console.log(data1);
+     setBoard(data1);
+     setLoading(null);
+      });  
   }
 
   const update = async() =>{
+     setLoading("Loading");
      console.log("Leaderboard called");
       socket.emit("update", {
       roomId
@@ -157,11 +169,13 @@ export default function Compete() {
      setBoard(data1);
       });
       console.log(board);
+      setLoading(null);
   }
    
   {/* SOlve problem   */}
 
   useEffect(() => { 
+      setLoading("Loading");
     async function api() {
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${"698f6f74ce0bdfd0c9616a72"}`,{
         method: "GET",
@@ -172,13 +186,14 @@ export default function Compete() {
       });
       const data = await response.json();
       setproblem(data);
+      setLoading(null);
      }
       api();
     },[]);
     
     //Api call for Running Code 
     const handleRun = () => {
-     
+      setLoading("Running");
       sethoutput(0);
        async function run() {
         let lang = "C++";
@@ -200,6 +215,7 @@ export default function Compete() {
       setsubmitresult(null);
       settestcases(data);
       sethoutput(40);
+      setLoading(null);
      }
       run(); 
   
@@ -218,7 +234,7 @@ export default function Compete() {
 })();
     //Api call for Running Code 
     const handleSubmit = () => {
-     
+      setLoading("Submitting");
       async function submit() {
         sethoutput(0);
         let lang = "C++";
@@ -241,6 +257,7 @@ export default function Compete() {
       setsubmitresult(data);
       console.log(data);
       sethoutput(40);
+      setLoading(null);
       if (data.status === "Accepted" || data.status_id === 3)
       {
        solve();
@@ -279,7 +296,8 @@ export default function Compete() {
   return "";
 };
 
-  return (
+  return (  <>
+    {!loading && 
     <div>
      
       {!joined && auth != null && 
@@ -575,6 +593,15 @@ export default function Compete() {
          }
           </>
        )}
-    </div>
-  );
+    </div>}
+    {loading != null && (
+   <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+    
+     <div className="flex flex-col items-center gap-3">
+      <ClipLoader size={42} color="#3b82f6" />
+      <p>{loading}</p>
+     </div>
+  </div>
+   )}
+  </>);
 }

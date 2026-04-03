@@ -5,9 +5,10 @@ import { FaChevronDown, FaChevronUp,FaPlay} from "react-icons/fa";
 import { MdFullscreen } from "react-icons/md";
 import {IoSend,IoCheckmark,IoClose,IoRemove,IoExpand} from "react-icons/io5";
 import { useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 export default function Solve() {
-  
+  const [loading, setLoading] = useState(null);
   const { id } = useParams();
   const [code, setCode] = useState("// Write your code here");
   const [houtput, sethoutput] = useState(0);
@@ -24,9 +25,9 @@ export default function Solve() {
   const difficulty = "Medium"
   const auth = JSON.parse(localStorage.getItem("auth")) || null;
   const [problems, setproblem] = useState(null);
-  console.log(id);
 
  useEffect(() => { 
+  setLoading("Loading");
   async function api() {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${"698f6f74ce0bdfd0c9616a72"}`,{
       method: "GET",
@@ -37,13 +38,14 @@ export default function Solve() {
     });
     const data = await response.json();
     setproblem(data);
+    setLoading(null);
    }
     api();
   },[]);
   
   //Api call for Running Code 
   const handleRun = () => {
-   
+    setLoading("Running");
     sethoutput(0);
      async function run() {
       let lang = "C++";
@@ -64,6 +66,7 @@ export default function Solve() {
     const data = await response.json();
     settestcases(data);
     sethoutput(40);
+    setLoading(null);
    }
     run(); 
 
@@ -82,7 +85,7 @@ export default function Solve() {
 })(); 
   //Api call for Running Code 
   const handleSubmit = () => {
-   
+    setLoading("Submitting");
     async function submit() {
       sethoutput(0);
       let lang = "C++";
@@ -105,12 +108,13 @@ export default function Solve() {
     setsubmitresult(data);
     console.log(data);
     sethoutput(40);
+    setLoading(null);
    }
     submit(); 
 
   };
  
-  const toPlainText = (data) => {
+const toPlainText = (data) => {
   if (data === null || data === undefined) return "";
 
   if (typeof data === "number" || typeof data === "boolean") 
@@ -139,8 +143,8 @@ export default function Solve() {
   return "";
 };
 
-  return ( 
-    <div style={{ display: "flex", height: "100vh" }}>
+  return (  <>
+    {loading===null && <div style={{ display: "flex", height: "100vh" }}>
 
       {/* Left Panel - Problem */} 
 
@@ -238,7 +242,6 @@ export default function Solve() {
      <p>Input : {toPlainText(t.stdin)}</p>
       <p>Output : {toPlainText(t.stdout) || "No output"}</p>
       <p>Expected Output : {toPlainText(t.expected_output)}</p>
-      {result==="Accepted" && setresult(t.status.description)}
       </span>
     )}
   </div>
@@ -315,6 +318,15 @@ export default function Solve() {
         </div>
 
       </div>
-    </div>
-  );
+    </div> }
+    {loading != null && (
+   <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+    
+     <div className="flex flex-col items-center gap-3">
+      <ClipLoader size={42} color="#3b82f6" />
+      <p>{loading}</p>
+     </div>
+  </div>
+   )}
+  </>);
 }

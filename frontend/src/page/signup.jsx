@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Outlet , useNavigate} from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);
@@ -46,7 +47,7 @@ export default function Signup() {
   };
 
   return ( <>
-    {loading &&
+    {!loading &&
     <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
 
       <div className="bg-white p-8 rounded-xl w-[90%] md:w-[30%]">
