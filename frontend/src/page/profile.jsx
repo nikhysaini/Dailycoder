@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import Chart from "react-apexcharts";
-import {FaUser,FaCrown} from "react-icons/fa";
+import {FaUser,FaCrown,FaCheckCircle } from "react-icons/fa";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import { Outlet , useNavigate} from "react-router-dom";
@@ -8,11 +8,13 @@ import { ClipLoader } from "react-spinners";
 
 
 export default function Profile() {
-  const [user,setuser] = useState("");
+  const [user,setuser] = useState({firstname:null,lastname:null,email:null,about:null,institution:null});
   const auth = JSON.parse(localStorage.getItem("auth"))||null;
   const navigate = useNavigate();
   const endDate = new Date();
   const startDate = new Date();
+  const [loading, setLoading] = useState(false);
+
   startDate.setDate(endDate.getDate() - 365); 
    const values = [
     { date: "2026-03-01", count: 1 },
@@ -39,9 +41,9 @@ export default function Profile() {
   };
 
   useEffect(() => { 
-    //  console.log(auth);
+      setLoading(true);
       async function api() { 
-         const response = await fetch(`${import.meta.env.BACKEND_URL}/user/getprofile`,{
+         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/getprofile`,{
          method: "GET",
          headers: {
            "Content-Type": "application/json",
@@ -51,22 +53,31 @@ export default function Profile() {
        });
        const data = await response.json();
        console.log(data);
-       setuser(data.user);
-      }
+       setuser({...user,firstname:data.user.firstname,lastname:data.user.lastname,
+               email:data.user.email,about:data.user.about});
+       setLoading(false);
+       }
        api();
-     
+       
      },[]);
   
 
-  return (
+  return ( <>
+
+  {!loading && auth!=null && ( 
   <div className="bg-black min-h-screen">
 
     <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-3 p-5 pt-15">
      <div className="justify-items-center">
         <button className="text-xl cursor-pointer flex items-center border-solid rounded-lg border-2 border-gray-700   text-purple-600 rounded px-3 py-1 mt-2 mb-3"><FaCrown/> GetPremium</button>
         <FaUser className="text-9xl bg-gray-300 rounded-full p-0.5 pt-[6%]" /> 
-        <p className="text-3xl font-semibold mt-2.5">{user.firstname}</p>
-        <p className="text-lg mt-0.5">Email</p>
+        <p className="text-3xl font-semibold mt-2.5">{user.firstname} {user.lastname}</p>
+       <div className="flex justify-between items-center">
+        <p className="text-lg mt-0.5">{user.email}</p>
+        <FaCheckCircle color="green" size={20} className="mt-1 ml-0.5" />
+       </div>
+        <p className="text-lg mt-0.5 bg-gray-100/20">{user.about}</p>
+        <p classname=" text-xl bg-gray-200/30 text-center pl-10 pt-4 rounded rounded-lg " ></p>
         <button onClick={ () => navigate("/editprofile")} className="text-lg cursor-pointer  items-center font-semibold bg-blue-600 text-white rounded-lg px-6 py-2 mt-6">Edit Profile</button>
      </div>
      <div className="">
@@ -96,9 +107,14 @@ export default function Profile() {
       />
     </div>
   
- </div>
-
-  );
+ </div> )}
+  {loading && auth!=null && (
+      <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+       <div><ClipLoader size={42} color="#3b82f6" className="ml-3.5"></ClipLoader> <p>Loading</p></div>
+      </div>
+      )}
+  
+  </>);
 }
 
 

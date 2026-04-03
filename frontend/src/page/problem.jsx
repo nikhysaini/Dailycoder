@@ -3,7 +3,8 @@ import { Outlet , useNavigate} from "react-router-dom";
 
 
 export default function Problem() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+
   const problems = [
     { id: 1, title: "Two Sum", difficulty: "Easy", tags: ["Array","HashMap"] },
     { id: 2, title: "Longest Substring", difficulty: "Medium", tags: ["String","Sliding Window"] },

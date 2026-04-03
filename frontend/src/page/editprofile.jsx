@@ -1,7 +1,9 @@
 import React, { useState,useEffect } from "react";
 import { Outlet , useNavigate} from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function EditProfile() {
+  const [loading, setLoading] = useState(false);
   const [email, setemail] = useState("");
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
@@ -11,8 +13,9 @@ export default function EditProfile() {
   const auth = JSON.parse(localStorage.getItem("auth"))||null;
   const navigate = useNavigate();
 
+
   useEffect(() => { 
-    console.log(auth);
+    setLoading(true);
     async function api() {
        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/getprofile`,{
        method: "GET",
@@ -23,13 +26,13 @@ export default function EditProfile() {
         credentials: "include"
      });
      const data = await response.json();
-     console.log(data);
      setfirstname(data.user.firstname);
      setlastname(data.user.lastname);
      setemail(data.user.email);
      setage(data.user.age);
      setinstitution(data.user.institution);
      setabout(data.user.about);
+     setLoading(false);
     }
      api();
    
@@ -38,7 +41,7 @@ export default function EditProfile() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    
+    setLoading(true);
 
     async function api() {
      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/editprofile`, {
@@ -58,6 +61,7 @@ export default function EditProfile() {
        credentials: "include"
     })
     const data = await response.json();
+    setLoading(false);
    }  
    api();
    
@@ -65,9 +69,9 @@ export default function EditProfile() {
 
   return (
     <>
-    { email!="" && <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
+    {!loading && auth!=null && <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
 
-      <div className="bg-white p-8 rounded-xl w-[80%] md:w-[30%]">
+      <div className="bg-white p-8 rounded-xl lg:w-[30%] md:w-[45%] sm:w-[70%]">
 
        <h2 className="text-yellow-600 text-2xl text-center mb-2 font-bold">Edit Profile </h2>
 
@@ -115,6 +119,11 @@ export default function EditProfile() {
       </div>
 
     </div>}
+    {loading && auth!=null && (
+    <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+     <div><ClipLoader size={42} color="#3b82f6" className="ml-3.5"></ClipLoader> <p>Loading</p></div>
+    </div>
+    )}
   </>
   );
 }
