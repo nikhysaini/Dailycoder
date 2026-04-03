@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Outlet , useNavigate} from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ClipLoader } from "react-spinners";
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -10,7 +13,7 @@ export default function Login() {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    
+    setLoading(true);
     console.log({email, password });
     async function api() {
      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/login`, {
@@ -25,6 +28,12 @@ export default function Login() {
        credentials: "include"
     })
     const data = await response.json();
+    if(!response.ok)
+    {
+       setLoading(false);
+       console.log(response);
+       throw new Error("Login failed");
+    }
     localStorage.setItem("auth", JSON.stringify({
     token: data.token,
     name: data.user.name,
@@ -32,6 +41,7 @@ export default function Login() {
     role:data.user.role
    }));
     console.log(data);
+    setLoading(false);
     navigate("/");
     alert("Login successfully");
 
@@ -40,8 +50,9 @@ export default function Login() {
    
   };
 
-  return (
+  return (<>
     
+    {!loading && 
     <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
 
       <div className="bg-white p-8 rounded-xl w-[80%] md:w-[30%]">
@@ -57,24 +68,30 @@ export default function Login() {
             className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
             value={email} onChange={(e)=>setEmail(e.target.value)} required />
           
-          <p className="text-lg my-0 py-0 text-black"> Password: </p>
+          <p className="text-lg my-0 py-0 text-black" space-b-1> Password: </p>
           <input type={showPassword ? "text" : "password"} placeholder="Password"
             className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
             value={password} onChange={(e)=>setPassword(e.target.value)} required/>
+         <span  className="flex items-center space-t-1 py-0 text-black" onClick={() => setShowPassword(!showPassword)}>
+          {!showPassword?"Show" :"Hide" } password {showPassword ? <FaEyeSlash size={21} className="pl-1 pt-1" /> : <FaEye size={21} className="pl-1 pt-1" />}</span>
 
-         <span  className="py-0 text-black" onClick={() => setShowPassword(!showPassword)}>{showPassword ? "Hide" : "Show"}</span>
           <button type="submit"
-            className="w-full bg-green-600 text-white p-2 rounded-md hover:bg-green-700 transition"
+            className="w-full bg-green-600 text-white p-2 pt-0.5 rounded-md hover:bg-green-700 transition"
           > Login </button>
 
         </form>
 
-         <p className="text-sm text-center mt-5 text-gray-600"> Register now ? 
+         <p className="text-md font-semibold text-center mt-5 text-gray-600 "> Register now ? 
           <a href="/signup" className="text-green-600 font-semibold ml-1"> Signup </a>
          </p>
 
       </div>
 
-    </div>
-  );
+    </div>}
+     {loading &&  (
+      <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+       <div><ClipLoader size={42} color="#3b82f6" className="ml-3.5"></ClipLoader> <p>Loading</p></div>
+      </div>
+      )}
+  </>);
 }

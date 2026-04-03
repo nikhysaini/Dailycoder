@@ -76,8 +76,7 @@ export default function Profile() {
         <p className="text-lg mt-0.5">{user.email}</p>
         <FaCheckCircle color="green" size={20} className="mt-1 ml-0.5" />
        </div>
-        <p className="text-lg mt-0.5 bg-gray-100/20">{user.about}</p>
-        <p classname=" text-xl bg-gray-200/30 text-center pl-10 pt-4 rounded rounded-lg " ></p>
+        <p className="text-lg mt-0.5 rounded-lg p-2 py-1.5 mt-1 w-fit">{user.about}</p>
         <button onClick={ () => navigate("/editprofile")} className="text-lg cursor-pointer  items-center font-semibold bg-blue-600 text-white rounded-lg px-6 py-2 mt-6">Edit Profile</button>
      </div>
      <div className="">

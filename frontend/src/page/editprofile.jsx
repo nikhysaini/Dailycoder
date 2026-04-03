@@ -104,7 +104,7 @@ export default function EditProfile() {
             value={institution} onChange={(e)=>setinstitution(e.target.value)} />
 
          <p className="text-lg my-0 py-0 text-black"> About: </p>
-          <textarea type="text" placeholder="Password"
+          <textarea type="text" placeholder="Password" maxLength={40}
             className="w-full border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500 text-black"
             value={about} onChange={(e)=>setabout(e.target.value)}/>
 

@@ -128,7 +128,7 @@ export default function Signup() {
 
         </form>
 
-        <p className="text-sm text-center mt-5 text-gray-600">
+        <p className="text-md font-semibold text-sm text-center mt-5 text-gray-600">
           Already have an account? 
           <a href="/login" className="text-green-600 font-semibold ml-1">
             Login

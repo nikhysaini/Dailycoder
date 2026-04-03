@@ -30,7 +30,7 @@ const register = async(req,res)=>{
       }
     }
     catch(e){
-      res.status(404).send(e.message);
+      res.status(404).json({message:e.message});
     }
 }
 
@@ -54,7 +54,7 @@ const login = async(req,res)=>{
         throw new Error("email not exists");
     }
     catch(e){
-     res.status(404).send(e.message);
+     res.status(404).json({message:e.message});
     }
 }
 
@@ -71,7 +71,7 @@ const logout = async(req,res)=>{
      }
     }
     catch(e){
-     res.status(404).send(e.message);
+     res.status(404).json({message:e.message});
     }
 }
 
@@ -115,7 +115,7 @@ const getprofile = async(req,res)=>{
     res.status(400).json({"message":"something is wrong"});
   }
   catch(e){
-   res.status(404).send(e.message);
+   res.status(404).json({message:e.message});
   }
 }
 
@@ -134,7 +134,7 @@ const deleteprofile = async(req,res)=>{
  res.status(200).send("Account deleted Successfully");
   }
   catch(e){
-   res.status(404).send(e.message);
+   res.status(404).json({message:e.message});
   }
 }
 module.exports = { register,deleteprofile,login,logout,editprofile,getprofile}
