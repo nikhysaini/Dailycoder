@@ -26,7 +26,7 @@ const register = async(req,res)=>{
       else{
         const hash_password = await bcrypt.hash(password,10)
         await user.create({firstname:firstname,lastname:lastname,email:email,password:hash_password});
-        res.status(200).send("Account created successfully");
+        res.status(200).json({message:"Account created successfully"});
       }
     }
     catch(e){

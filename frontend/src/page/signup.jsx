@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Outlet , useNavigate} from "react-router-dom";
 
 export default function Signup() {
+  const [loading, setLoading] = useState(false);
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
   const [email, setEmail] = useState("");
@@ -11,14 +12,13 @@ export default function Signup() {
   
 
 
-  const handleSignup = (e) => {
+  const handleSignup = async(e) => {
     e.preventDefault();
-
+    setLoading(true);
+    try{
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
+      throw new Error("Passwords do not match");
     }
-    async function api() {
      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/register`, {
       method: "POST",
       headers: {
@@ -32,18 +32,21 @@ export default function Signup() {
       }),
        credentials: "include"
     });
-    const data = await response.text();
-    if(data=="Account created successfully")
-     { alert("Account created successfully");navigate("/login");}
-    else 
-      alert(data);
-   }      
-   api();
-    console.log({ firstname,lastname,email, password });
+    const data = await response.json();
+    if(!response.ok)
+     throw new Error(data.message);
+     setLoading(false);
+     alert(data.message);
+  }
+  catch(e)
+  {
+    setLoading(false);
+    alert(`${e.message}`)
+  }
   };
 
-  return (
-    
+  return ( <>
+    {loading &&
     <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
 
       <div className="bg-white p-8 rounded-xl w-[90%] md:w-[30%]">
@@ -137,6 +140,11 @@ export default function Signup() {
 
       </div>
 
-    </div>
-  );
+    </div>}
+    {loading &&  (
+      <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+       <div><ClipLoader size={42} color="#3b82f6" className="ml-3.5"></ClipLoader> <p>Loading</p></div>
+      </div>
+      )}
+  </>);
 }

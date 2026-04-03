@@ -11,11 +11,11 @@ export default function Login() {
   const auth = JSON.parse(localStorage.getItem("auth"))||null;
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
+  const handleSignup = async(e) => {
     e.preventDefault();
     setLoading(true);
+    try{
     console.log({email, password });
-    async function api() {
      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/login`, {
       method: "POST",
       headers: {
@@ -28,12 +28,13 @@ export default function Login() {
        credentials: "include"
     })
     const data = await response.json();
-    if(!response.ok)
+     if(!response.ok)
     {
        setLoading(false);
        console.log(response);
-       throw new Error("Login failed");
+       throw new Error(data.message)
     }
+    
     localStorage.setItem("auth", JSON.stringify({
     token: data.token,
     name: data.user.name,
@@ -45,8 +46,11 @@ export default function Login() {
     navigate("/");
     alert("Login successfully");
 
-   }      
-   api();
+  }
+  catch(e)
+  {
+    alert(`${e}`);
+  }
    
   };
 
