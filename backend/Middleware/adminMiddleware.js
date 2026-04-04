@@ -13,7 +13,7 @@ const adminMiddleware = async(req,res,next)=>{
     const isuser = await user.findOne({email:email})
     const role = isuser.role;
     console.log(role);
-    if(role===admin)
+    if(role==="admin")
      next();
     else 
       throw new Error("login please")

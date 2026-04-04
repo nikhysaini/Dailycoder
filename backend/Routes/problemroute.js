@@ -6,7 +6,7 @@ const {createProblem,updateProblem,deleteProblem,getProblemById,getAllProblem,so
 
 
 // admin
-problemRouter.post("/create",adminMiddleware ,createProblem);
+problemRouter.post("/create",createProblem);
 problemRouter.put("/update/:id",updateProblem);
 problemRouter.delete("/delete/:id",deleteProblem);
 
