@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 
 const createProblem = async(req,res)=>{
-const {title,description,difficulty,tags,
+const {title,description,difficulty,tags,constraints,
         visibleTestCases,hiddenTestCases,startCode,
         referenceSolution, problemCreator
     } = req.body;
@@ -50,11 +50,11 @@ const {title,description,difficulty,tags,
         id:count+1
       });
 
-      res.status(201).send("Problem Saved Successfully");
+      res.status(200).json({message:"Problem Saved Successfully"});
   }
    catch(e)
   {
-    res.status(404).send(e.message);
+    res.status(404).json({message:e.message});
   }
 }
 

@@ -9,6 +9,24 @@ export default function AdminCreate() {
   constraints:null,
   VisibleTescase:null,
   HiddenTescase:null,
+  solution:[
+        {
+            "language": "C++",
+            "completeCode": ""
+        },
+        {
+            "language": "Java",
+            "completeCode": ""
+        },
+        {
+            "language": "JavaScript",
+            "completeCode": ""
+        },
+        {
+            "language": "Python",
+            "completeCode": ""
+        }
+    ],
   })
   const handleChange = (e) => {
     setProblem({
@@ -18,6 +36,7 @@ export default function AdminCreate() {
     console.log(e.target.value)
   }
   const handleSubmit = async(e) => {
+   console.log(problem); 
    async function api() {
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/create`,{
         method: "POST",
@@ -29,7 +48,6 @@ export default function AdminCreate() {
       }),
          credentials: "include"
       });
-      
       console.log(response);
       alert("update successfully")
      }
@@ -90,16 +108,27 @@ export default function AdminCreate() {
       <p  className="mt-4">Visible Tescase</p>
       <textarea
         name="VisibleTescase"
+        rows="8"
         placeholder="Sample Output"
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-800 big-textarea"
         onChange={handleChange}
       />
       
      <p  className="mt-4">Hidden Tescase</p>
       <textarea
         name="HiddenTescase"
+        rows="10"
         placeholder="Sample Output"
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-800 "
+        onChange={handleChange}
+      />
+
+      <p  className="mt-4">Reference solution</p>
+      <textarea
+        name="solution"
+        rows="10"
+        placeholder="solution code"
+        className="border p-2 rounded bg-gray-800 "
         onChange={handleChange}
       />
 
