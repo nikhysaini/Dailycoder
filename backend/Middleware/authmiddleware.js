@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken')
 
 const usermiddleware = async(req,res,next)=>{
  try{
-  //const token = req.headers.token;
-  const {token} = req.cookies;
+  const token = req.headers.token;
+  //const {token} = req.cookies;
   const tokenexists = await redisclient.exists(`token:${token}`);
   if(!tokenexists)
   {
