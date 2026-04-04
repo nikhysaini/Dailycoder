@@ -35,7 +35,7 @@ const {title,description,difficulty,tags,constraints,
          if(test.status_id==4) return res.status(400).send("Wrong Answer");
          if(test.status_id==5) return res.status(400).send("Time Limit Exceeded");
          if(test.status_id==6) return res.status(400).send("Compilation Error");
-         if(test.status_id=7) return res.status(400).send("Runtime Error (SIGSEGV)");
+         if(test.status_id>=7) return res.status(400).send(testResult);
         }
        }
     
