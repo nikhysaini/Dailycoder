@@ -29,7 +29,7 @@ export default function Solve() {
  useEffect(() => { 
   setLoading("Loading");
   async function api() {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${"69d13f7d94c6b54502bb30f3"}`,{
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${"69d27eab67c44873b6ba0a6b"}`,{
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export default function Solve() {
       if(language==="python") lang = "Python";
       else if(language==="javascript") lang = "Javascript";
       else if(language==="java") lang = "Java";
-     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/run/${"69d13f7d94c6b54502bb30f3"}`, {
+     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/run/${"69d27eab67c44873b6ba0a6b"}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ export default function Solve() {
       if(language==="python") lang = "Python";
       else if(language==="javascript") lang = "Javascript";
       else if(language==="java") lang = "Java";
-     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/submit/${"69d13f7d94c6b54502bb30f3"}`, {
+     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/submit/${"69d27eab67c44873b6ba0a6b"}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
