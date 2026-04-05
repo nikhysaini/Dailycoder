@@ -20,12 +20,16 @@ const problemSchema = new mongoose.Schema({
     tags:{
         type:[String],
     },
-    Constraints:{
+    constraints:{
         type:[String],
     },
     visibleTestCases:[
         {
             input:{
+                type:String,
+                required:true,
+            },
+            sinput:{
                 type:String,
                 required:true,
             },
