@@ -43,14 +43,13 @@ export default function Problem() {
     },[]);
   return (<>
     {!loading && 
-    <div className="p-8">
-
-      <h1 className="lg:w-[84%] md:w-[90%] sm:w-[96%] mx-auto text-2xl font-bold mb-6">
+    <div className="">
+      <h1 className="w-[80%] mx-auto text-3xl font-bold mb-6 mt-3 text-blue-500 text-center">
         Premium problems
       </h1>
 
       {/* Filters */}
-      <div className="lg:w-[84%] md:w-[90%] sm:w-[96%] mx-auto flex gap-4 mb-6 items-center">
+      <div className="w-[80%] mx-auto gap-4 mb-6  items-center flex justify-between">
 
         {/* Difficulty Filter */}
         <select
