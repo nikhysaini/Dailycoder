@@ -86,10 +86,10 @@ export default function Problem() {
       </div>
 
     
-      <table className="lg:w-[84%] md:w-[90%] sm:full mx-auto border">
+      <table className="w-[80%]  mx-auto border">
 
-        <thead className="bg-white text-black border-3 border-black">
-          <tr>
+        <thead className="text-center bg-white text-black border-3 border-black">
+          <tr className="grid grid-cols-3">
             <th className="p-3 text-center" >Title</th>
             <th className="p-3 text-center">Difficulty</th>
             <th className="p-3 text-center">Tags</th>
@@ -98,7 +98,7 @@ export default function Problem() {
 
         <tbody>
           {filteredProblems?.map((p) => (
-            <tr key={p.id} className="border-t bg-gray-800 border-2 border-gray-900 ">
+            <tr key={p.id} className="grid grid-cols-3 text-center border-t bg-gray-800 border-2 border-gray-900 ">
               
               <td className="p-3 text-white font-bold text-center cursor-pointer  hover:text-green-500" onClick={() => {navigate(`/solve/${p.id}`)}}>
                   {p.title}

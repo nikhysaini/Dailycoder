@@ -9,7 +9,7 @@ import { ClipLoader } from "react-spinners";
 
 export default function Solve() {
   const [loading, setLoading] = useState(null);
-  const { id } = useParams();
+  const { id } = useParams() ;
   const [code, setCode] = useState("// Write your code here");
   const [houtput, sethoutput] = useState(0);
   const [result, setresult] = useState("Accepted");
