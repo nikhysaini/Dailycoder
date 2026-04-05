@@ -181,7 +181,7 @@ const toPlainText = (data) => {
       </div>
        <h4 className="my-5"></h4>
       <div className="bg-gray-100 text-black p-2">
-        <p><span >Input:</span>{problems?.visibleTestCases[1].sinput || problems?.visibleTestCases[1].input} </p>
+        <p><span >Input:</span> {problems?.visibleTestCases[1].sinput || problems?.visibleTestCases[1].input}</p>
         <p><span >Output:</span> {problems?.visibleTestCases[1].output}</p>
         <p><span >Explanation:</span> { problems?.visibleTestCases[1].explanation } </p>
       </div>
@@ -189,8 +189,9 @@ const toPlainText = (data) => {
      
       <p className="mt-5 font-bold">Constraints</p>
       <div>
-      <p>1 &lt;= n &lt;= 1e5</p>
-      <p>1 &lt;= nums[i] , target &lt;= 1e9</p>
+      {problems.constraints.map( (x)=>
+      <p>Input : {x}</p>
+       )}
       </div>
       
       <button className="mt-5 font-bold flex items-center gap-2" onClick={() => setShowTags(!showTags)}>
