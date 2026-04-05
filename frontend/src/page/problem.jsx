@@ -100,7 +100,7 @@ export default function Problem() {
           {filteredProblems?.map((p) => (
             <tr key={p.id} className="grid grid-cols-3 text-center border-t bg-gray-800 border-2 border-gray-900 ">
               
-              <td className="p-3 text-white font-bold text-center cursor-pointer  hover:text-green-500" onClick={() => {navigate(`/solve/${p.id}`)}}>
+              <td className="p-3 text-white font-bold text-center cursor-pointer  hover:text-green-500" onClick={() => {navigate(`/solve/${p._id}`)}}>
                   {p.title}
               </td>
 
