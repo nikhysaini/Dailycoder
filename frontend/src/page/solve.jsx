@@ -175,13 +175,13 @@ const toPlainText = (data) => {
 
         <p className="mt-5 mb-3 font-bold">Examples:</p>
       <div className="bg-gray-100 text-black p-2">
-        <p><span >Input:</span> {problems?.visibleTestCases[0].input}</p>
+        <p><span >Input:</span> {problems?.visibleTestCases[0].sinput || problems?.visibleTestCases[0].input}</p>
         <p><span >Output:</span>{problems?.visibleTestCases[0].output}</p>
         <p><span >Explanation:</span>  { problems?.visibleTestCases[0].explanation } </p>
       </div>
        <h4 className="my-5"></h4>
       <div className="bg-gray-100 text-black p-2">
-        <p><span >Input:</span>{problems?.visibleTestCases[1].input} </p>
+        <p><span >Input:</span>{problems?.visibleTestCases[1].sinput || problems?.visibleTestCases[1].input} </p>
         <p><span >Output:</span> {problems?.visibleTestCases[1].output}</p>
         <p><span >Explanation:</span> { problems?.visibleTestCases[1].explanation } </p>
       </div>
