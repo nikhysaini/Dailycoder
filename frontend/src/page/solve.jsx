@@ -29,7 +29,7 @@ export default function Solve() {
  useEffect(() => { 
   setLoading("Loading");
   async function api() {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${"69d27eab67c44873b6ba0a6b"}`,{
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${id}`,{
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -39,6 +39,7 @@ export default function Solve() {
     const data = await response.json();
     setproblem(data);
     setLoading(null);
+    console.log(problems);
    }
     api();
   },[]);
@@ -52,7 +53,7 @@ export default function Solve() {
       if(language==="python") lang = "Python";
       else if(language==="javascript") lang = "Javascript";
       else if(language==="java") lang = "Java";
-     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/run/${"69d27eab67c44873b6ba0a6b"}`, {
+     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/run/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +93,7 @@ export default function Solve() {
       if(language==="python") lang = "Python";
       else if(language==="javascript") lang = "Javascript";
       else if(language==="java") lang = "Java";
-     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/submit/${"69d27eab67c44873b6ba0a6b"}`, {
+     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/submit/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -176,7 +177,7 @@ const toPlainText = (data) => {
         <p className="mt-5 mb-3 font-bold">Examples:</p>
       <div className="bg-gray-100 text-black p-2">
         <p><span >Input:</span> {problems?.visibleTestCases[0].sinput || problems?.visibleTestCases[0].input}</p>
-        <p><span >Output:</span>{problems?.visibleTestCases[0].output}</p>
+        <p><span >Output:</span> {problems?.visibleTestCases[0].output}</p>
         <p><span >Explanation:</span>  { problems?.visibleTestCases[0].explanation } </p>
       </div>
        <h4 className="my-5"></h4>
@@ -187,12 +188,15 @@ const toPlainText = (data) => {
       </div>
      
      
-      <p className="mt-5 font-bold">Constraints</p>
+      {problems!=null &&
+      (<div><p className="mt-5 font-bold">Constraints</p>
       <div>
-      {problems.constraints.map( (x)=>
-      <p>Input : {x}</p>
+       {problems.constraints.map( (x,index)=>
+       <p key={index}>{x}</p>
        )}
       </div>
+      </div>)
+      }
       
       <button className="mt-5 font-bold flex items-center gap-2" onClick={() => setShowTags(!showTags)}>
        <span className="font-bold">Tags</span>  {showTags ? <FaChevronUp className="inline-block pt-1" /> : <FaChevronDown className="inline-block  pt-1" />}

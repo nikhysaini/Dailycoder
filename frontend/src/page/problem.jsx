@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Outlet , useNavigate} from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 
 export default function Problem() {
     const navigate = useNavigate();
 
-  const problems = [
+  const problem = [
     { id: 1, title: "Two Sum", difficulty: "Easy", tags: ["Array","HashMap"] },
     { id: 2, title: "Longest Substring", difficulty: "Medium", tags: ["String","Sliding Window"] },
     { id: 3, title: "Merge K Lists", difficulty: "Hard", tags: ["LinkedList","Heap"] },
@@ -14,16 +15,34 @@ export default function Problem() {
   
   const [difficulty, setDifficulty] = useState("All");
   const [tag, setTag] = useState("All");
+  const [problems, setproblem] = useState(null);
+  const [loading, setLoading] = useState(null);
 
-  const filteredProblems = problems.filter((p) => {
+  const filteredProblems = problems?.filter((p) => {
     return (
       (difficulty === "All" || p.difficulty === difficulty) &&
       (tag === "All" || p.tags.includes(tag))
     );
   });
-
-  return (
-    
+  useEffect(() => { 
+    setLoading("Loading");
+    async function api() {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/getAllProblem`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+         credentials: "include"
+      });
+      const data = await response.json();
+      setproblem(data);
+      setLoading(null);
+      console.log(problems);
+     }
+      api();
+    },[]);
+  return (<>
+    {!loading && 
     <div className="p-8">
 
       <h1 className="lg:w-[84%] md:w-[90%] sm:w-[96%] mx-auto text-2xl font-bold mb-6">
@@ -71,14 +90,14 @@ export default function Problem() {
 
         <thead className="bg-white text-black border-3 border-black">
           <tr>
-            <th className="p-3 text-left">Title</th>
-            <th className="p-3 text-left">Difficulty</th>
-            <th className="p-3 text-left">Tags</th>
+            <th className="p-3 text-center" >Title</th>
+            <th className="p-3 text-center">Difficulty</th>
+            <th className="p-3 text-center">Tags</th>
           </tr>
         </thead>
 
         <tbody>
-          {filteredProblems.map((p) => (
+          {filteredProblems?.map((p) => (
             <tr key={p.id} className="border-t bg-gray-800 border-2 border-gray-900 ">
               
               <td className="p-3 text-white font-bold text-center cursor-pointer  hover:text-green-500" onClick={() => {navigate(`/solve/${p.id}`)}}>
@@ -96,7 +115,7 @@ export default function Problem() {
               </td>
 
                <td className="p-3 text-center">
-                 <button onClick={() => {navigate(`/solve/${p.id}`)}} className="bg-blue-600 px-3 py-1 rounded cursor-pointer">Solve</button>
+                 <button onClick={() => {navigate(`/solve/${p._id}`)}} className="bg-blue-600 px-3 py-1 rounded cursor-pointer">Solve</button>
                 </td> 
             </tr>
           ))}
@@ -104,6 +123,15 @@ export default function Problem() {
 
       </table> 
 
-    </div>
-  );
+    </div>}
+     {loading != null && (
+   <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+    
+     <div className="flex flex-col items-center gap-3">
+      <ClipLoader size={42} color="#3b82f6" />
+      <p>{loading}</p>
+     </div>
+  </div>
+   )}
+  </>);
 }
