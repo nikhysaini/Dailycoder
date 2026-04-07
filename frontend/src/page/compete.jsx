@@ -301,41 +301,43 @@ export default function Compete() {
     <div>
      
       {!joined && auth != null && 
-      <div>
-       <div className="flex justify-center p-6 gap-15">
-         <button className="bg-blue-600 p-1.5 rounded" onClick={()=>{setroommenu("join")}}>Join Room</button>
-         <button className="bg-blue-600 p-1.5 rounded" onClick={()=>{setroommenu("click")}}>Create Room</button>
-       </div>
-       {roommenu==="join" && 
-       <div className="text-center p-4">
-      <input className="bg-gray-300 text-black p-2 py-1"
+      <div className=" mt-[10%] grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 w-[80%] place-items-center gap-8  mx-auto">
+       
+       <div className="shadow-lg rounded-lg text-center bg-gray-400/10 min-h-95 min-w-80">
+       <p className="text-3xl mt-15">Join Contest</p>
+       <div className="text-center w-[58%] mx-auto text-sm mt-7">
+        <p>Join ongoing contest or with your friends</p>
+      </div>
+      <input className="bg-gray-300 text-black p-2 py-1.5 rounded mt-18"
         placeholder="Enter Contest ID"
         value={roomId}
         onChange={(e) => setRoomId(e.target.value)}
        />
        <p></p>
-      <button className="bg-green-600 mt-3 p-3 py-1.5 pointer-courser rounded" onClick={joinRoom}>Join Contest</button>
-       </div>}
-      {roommenu==="click" && 
-       <div className="text-center">
-      <input className="bg-gray-300 text-black mt-2.5 p-2 py-1"
+      <button className="mt-8 text-center bg-green-600 mt-3 p-3 py-1.5 pointer-courser rounded" onClick={joinRoom}>Join Contest</button>
+       </div>
+ 
+       <div className="shadow-lg rounded-lg text-center bg-gray-400/10 min-h-95 min-w-80 ">
+      <p className="text-3xl mt-15">Create Contest</p>
+      <div className="mt-10">
+      <input className="bg-gray-300 text-black mt-2.5 p-2 py-1.5 rounded"
         placeholder="Enter Room ID"
         value={roomId}
         onChange={(e) => setRoomId(e.target.value)}
        />
        <p></p>
-      <input className="bg-gray-300 text-black mt-2.5 p-2 py-1"
+      <input className="bg-gray-300 text-black mt-2.5 p-2 py-1.5 rounded"
         placeholder="Enter valid problem Title"
         value={problemtitle}
         onChange={(e) => setproblemtitle(e.target.value)}
        /><p></p>
-       <input className="bg-gray-300 text-black mt-2.5 p-2 py-1"
+       <input className="bg-gray-300 text-black mt-2.5 p-2 py-1.5 rounded"
         placeholder="Contest Duration"
         value={contesttime}
         onChange={(e) => setcontesttime(e.target.value)}
        /><p></p>
-      <button className="bg-green-600 mt-3.5 p-3 py-1.5 rounded courser-pointer" onClick={createRoom}>Create Contest</button>
-       </div>}
+      <button className="bg-green-600 mt-8 p-3 py-1.5 rounded courser-pointer" onClick={createRoom}>Create Contest</button></div>
+       </div>
 
       </div>
       }
@@ -366,18 +368,10 @@ export default function Compete() {
     </button>
    </div>
           
-      {/* <div className="justify-between">
-        <button className="mr-5 bg-gray-500 rounded p-1" onClick={()=>setTabs("roomproblem")}> problem</button>
-        <button className="mx-5 bg-gray-500 rounded p-1" onClick={()=>setTabs("leaderboard")}>Leaderboard</button>
-           
-      </div> */}
       
       {Tab==='roomproblem' &&
           <>
          
-          
-         
-
          <div style={{ display: "flex", height: "100vh" }}>
 
       {/* Left Panel - Problem */} 
