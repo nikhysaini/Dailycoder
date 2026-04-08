@@ -301,10 +301,10 @@ export default function Compete() {
     <div>
      
       {!joined && auth != null && 
-      <div className=" mt-[10%] grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 w-[80%] place-items-center gap-8  mx-auto">
+      <div className=" my-[10%] grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 w-[80%] place-items-center gap-8 lg:gap-5 mx-auto">
        
        <div className="shadow-lg rounded-lg text-center bg-gray-400/10 min-h-95 min-w-80">
-       <p className="text-3xl mt-15">Join Contest</p>
+       <p className="text-3xl mt-15 font-mono font-semibold text-blue-500">Join Contest</p>
        <div className="text-center w-[58%] mx-auto text-sm mt-7">
         <p>Join ongoing contest or with your friends</p>
       </div>
@@ -318,7 +318,7 @@ export default function Compete() {
        </div>
  
        <div className="shadow-lg rounded-lg text-center bg-gray-400/10 min-h-95 min-w-80 ">
-      <p className="text-3xl mt-15">Create Contest</p>
+      <p className="text-3xl mt-15 font-mono font-semibold text-blue-500">Create Contest</p>
       <div className="mt-10">
       <input className="bg-gray-300 text-black mt-2.5 p-2 py-1.5 rounded"
         placeholder="Enter Room ID"
