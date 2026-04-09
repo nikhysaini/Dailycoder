@@ -97,9 +97,9 @@ export default function Problem() {
 
         <tbody>
           {filteredProblems?.map((p) => (
-            <tr key={p.id} className="grid grid-cols-3 text-center border-t bg-gray-800 border-2 border-gray-900 ">
+            <tr key={p.id} className="grid grid-cols-3 text-center border-t bg-gray-200 border-2 border-gray-900 ">
               
-              <td className="p-3 text-white font-bold text-center cursor-pointer  hover:text-green-500" onClick={() => {navigate(`/solve/${p._id}`)}}>
+              <td className="p-3 text-black  font-bold text-center cursor-pointer  hover:text-green-500" onClick={() => {navigate(`/solve/${p._id}`)}}>
                   {p.title}
               </td>
 
@@ -110,11 +110,11 @@ export default function Problem() {
                   ? "text-yellow-600"
                   : "text-red-600"
               }`}>
-                {p.difficulty}
+                <span className="text-center">{p.difficulty}</span>
               </td>
 
                <td className="p-3 text-center">
-                 <button onClick={() => {navigate(`/solve/${p._id}`)}} className="bg-blue-600 px-3 py-1 rounded cursor-pointer">Solve</button>
+                 <button onClick={() => {navigate(`/solve/${p._id}`)}} className="bg-blue-500/95 hover:bg-blue-600/90 px-3 py-1 rounded cursor-pointer">Solve</button>
                 </td> 
             </tr>
           ))}

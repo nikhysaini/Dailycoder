@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 
 export default function Home() {
 
-return (<div className="">
+return (<div className="min-h-screen bg-gray-100 py-16 pt-20 px-16">
 
- <div className="bg-gray-200/80 hover:bg-white/15 shadow-xl mx-15 rounded transform transition grid lg:grid-cols-2 sm:grid-cols-1 gap-2 gap-y-7 text-center p-10 py-30">
-  
+ <div className="bg-gray-200/10 hover:bg-white/15 shadow-xl rounded transform transition grid lg:grid-cols-2 sm:grid-cols-1 gap-2 gap-y-7 text-center p-10 py-26">
    <div className="">
-     <div className="text-5xl text-left ml-3 font-serif text-red-400/50">One <span className="text-blue-600">Problem</span> a day</div>
-     <div className="text-md text-center pl-5 pt-1 ml-5 text-yellow-500">@ keeps rejection away</div>
+     <div className="text-5xl  font-serif text-red-600/50">One <span className="text-blue-600">Problem</span> a day</div>
+     <div className="text-md text-center pl-5 pt-1 ml-5 text-black">@ keeps rejection away</div>
+     <button className="w-50 bg-green-400 hover:bg-green-500/90 rounded-lg text-lg cursor-pointer text-center mt-12 mr-50 px-2 py-2 text-black mx-auto">Solve Today problem</button>
     </div>
 
 

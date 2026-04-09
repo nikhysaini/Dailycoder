@@ -298,14 +298,14 @@ export default function Compete() {
 
   return (  <>
     {!loading && 
-    <div>
+    <div className="min-h-screen bg-gray-100">
      
       {!joined && auth != null && 
-      <div className=" my-[10%] grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 w-[80%] place-items-center gap-8 lg:gap-5 mx-auto">
+      <div className=" py-[10%] grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 w-[80%] place-items-center gap-8 lg:gap-5 mx-auto">
        
-       <div className="shadow-lg rounded-lg text-center bg-gray-400/10 min-h-95 min-w-80">
+       <div className="shadow-lg rounded-lg text-center bg-gray-200/20 hover:bg-white/60 min-h-95 min-w-80">
        <p className="text-3xl mt-15 font-mono font-semibold text-blue-500">Join Contest</p>
-       <div className="text-center w-[58%] mx-auto text-sm mt-7">
+       <div className="text-black w-[58%] mx-auto text-sm mt-7">
         <p>Join ongoing contest or with your friends</p>
       </div>
       <input className="bg-gray-300 text-black p-2 py-1.5 rounded mt-18"
@@ -317,7 +317,7 @@ export default function Compete() {
       <button className="mt-8 text-center bg-green-600 mt-3 p-3 py-1.5 pointer-courser rounded" onClick={joinRoom}>Join Contest</button>
        </div>
  
-       <div className="shadow-lg rounded-lg text-center bg-gray-400/10 min-h-95 min-w-80 ">
+       <div className="shadow-lg rounded-lg text-center bg-gray-200/20 hover:bg-white/60 min-h-95 min-w-80 ">
       <p className="text-3xl mt-15 font-mono font-semibold text-blue-500">Create Contest</p>
       <div className="mt-10">
       <input className="bg-gray-300 text-black mt-2.5 p-2 py-1.5 rounded"

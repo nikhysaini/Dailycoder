@@ -16,11 +16,11 @@ export default function Admin() {
      <div className="grid lg:grid-cols-3 mt-8 lg:mx-15 md:mx-10 sm:mx-6 md:grid-cols-2 sm:grid-cols-1 "> 
       {
         problem.map((p,index)=>(
-         <div key={index} className="bg-gray-800 border-1  border-gray-900 rounded-lg m-2 p-3 flex flex-col items-center text-center">
-           <p className="text-xl"><p.icon className={`w-13 h-13 p-2 mt-3 rounded-full ${p.color}`} /></p>
-           <p className="text-2xl font-semibold mt-3"> {p.type}</p>
-           <p className="mt-3"> {p.des}</p>
-           <button onClick={()=>{navigate(`${p.page}`)}} className={`mt-6 mb-4 rounded-lg p-2 px-2.5 cursor-pointer font-semibold text-black ${p.color1}`}>{p.type}</button>
+         <div key={index} className="bg-gray-800 border-1  border-gray-900 text-white rounded-lg m-2 p-3 flex flex-col items-center text-center">
+           <p className="text-xl"><p.icon className={`w-13 h-13 p-2 mt-3 text-white rounded-full ${p.color}`} /></p>
+           <p className="text-2xl font-semibold mt-3 text-white"> {p.type}</p>
+           <p className="mt-3 text-white"> {p.des}</p>
+           <button onClick={()=>{navigate(`${p.page}`)}} className={`text-white mt-6 mb-4 rounded-lg p-2 px-2.5 cursor-pointer font-semibold text-black ${p.color1}`}>{p.type}</button>
          </div>
         )
         )
