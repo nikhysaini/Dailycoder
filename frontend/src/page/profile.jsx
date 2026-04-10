@@ -67,7 +67,7 @@ export default function Profile() {
   {!loading && auth!=null && ( 
   <div className="bg-black min-h-screen">
 
-    <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-3 p-5 pt-15">
+    <div className="grid lg:grid-cols-2 md:grid-cols-1 text-white sm:grid-cols-1 gap-3 p-5 pt-15">
      <div className="justify-items-center">
         <button className="text-xl cursor-pointer flex items-center border-solid rounded-lg border-2 border-gray-700   text-purple-600 rounded px-3 py-1 mt-2 mb-3"><FaCrown/> GetPremium</button>
         <FaUser className="text-9xl bg-gray-300 rounded-full p-0.5 pt-[6%]" /> 
@@ -77,7 +77,7 @@ export default function Profile() {
         <FaCheckCircle color="green" size={20} className="mt-1 ml-0.5" />
        </div>
         <p className="text-lg mt-0.5 rounded-lg p-2 py-1.5 mt-1 w-fit">{user.about}</p>
-        <button onClick={ () => navigate("/editprofile")} className="text-lg cursor-pointer  items-center font-semibold bg-blue-600 text-white rounded-lg px-6 py-2 mt-6">Edit Profile</button>
+        <button onClick={ () => navigate("/editprofile")} className=" text-center text-lg cursor-pointer  items-center  font-semibold bg-blue-600 text-white rounded-lg px-6 py-2 mt-6">Edit Profile</button>
      </div>
      <div className="">
        <div className="grid lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1 gap-3">

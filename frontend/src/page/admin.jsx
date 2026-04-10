@@ -12,10 +12,10 @@ export default function Admin() {
      <>
      <div className="lg:mx-15 md:mx-10 sm:mx-6 text-4xl mt-5 text-center font-semibold text-blue-500"> Admin Panel </div>
      <div className="lg:mx-15 md:mx-10 sm:mx-6 text-2xl text-center font-semibold"> Manage problems & Contests on the platform </div>
-     <div className="grid lg:grid-cols-3 mt-5 lg:mx-15 md:mx-10 sm:mx-6 md:grid-cols-2 sm:grid-cols-1 "> 
+     <div className="grid lg:grid-cols-3 mt-5 lg:mx-15 md:mx-10 sm:mx-6 md:grid-cols-2 sm:grid-cols-1"> 
       {
         problem.map((p,index)=>(
-         <div key={index} className="bg-gray-800 border-1  border-gray-900 rounded-lg m-2 p-3 flex flex-col items-center text-center">
+         <div key={index} className="bg-gray-800 border-1 border-gray-100 rounded-lg m-2 p-3 flex flex-col items-center text-center hover:bg-gray-500">
            <p className="text-xl"><p.icon className={`w-13 h-13 p-2 mt-3 rounded-full ${p.color}`} /></p>
            <p className="text-2xl font-semibold mt-3"> {p.type}</p>
            <p className="mt-3"> {p.des}</p>

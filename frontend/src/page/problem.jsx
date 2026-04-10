@@ -41,10 +41,11 @@ export default function Problem() {
      }
       api();
     },[]);
-  return (<>
+  return (
+    <div className="bg-gray-100 min-h-screen">
     {!loading && 
     <div className="">
-      <h1 className="w-[80%] mx-auto text-3xl font-bold mb-6 mt-3 text-blue-500 text-center">
+      <h1 className="w-[80%] mx-auto text-3xl font-bold mb-6 pt-3 text-blue-500 text-center">
         Premium problems
       </h1>
 
@@ -85,19 +86,20 @@ export default function Problem() {
       </div>
 
     
-      <table className="w-[80%]  mx-auto border">
-
-        <thead className="text-center bg-white text-black border-3 border-black">
+      <table className="w-[80%] mx-auto ">
+      
+        <thead className="text-center bg-black text-white rounded-lg ">
           <tr className="grid grid-cols-3">
-            <th className="p-3 text-center" >Title</th>
-            <th className="p-3 text-center">Difficulty</th>
-            <th className="p-3 text-center">Tags</th>
+            <th className="p-3 text-center text-semibold font-serif" >Title</th>
+            <th className="p-3 text-center text-semibold  font-serif">Difficulty</th>
+            <th className="p-3 text-center text-semibold  font-serif">Tags</th>
           </tr>
         </thead>
-
-        <tbody>
+    
+        <div className="mt-1"></div>
+        <tbody >
           {filteredProblems?.map((p) => (
-            <tr key={p.id} className="grid grid-cols-3 text-center border-t bg-gray-200 border-2 border-gray-900 ">
+            <tr key={p.id} className="rounded-lg grid grid-cols-3 text-center border-gray-100 bg-white border-3 border-gray-100 ">
               
               <td className="p-3 text-black  font-bold text-center cursor-pointer  hover:text-green-500" onClick={() => {navigate(`/solve/${p._id}`)}}>
                   {p.title}
@@ -132,5 +134,5 @@ export default function Problem() {
      </div>
   </div>
    )}
-  </>);
+  </div>);
 }
