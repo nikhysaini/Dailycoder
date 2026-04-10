@@ -151,12 +151,12 @@ const toPlainText = (data) => {
 
        {/* Tab */} 
       <div className="overflow-auto w-[45%] " >
-         <div className="flex gap-8 items-center justify-between cursor-pointer bg-gray-800 rounded-md py-3 px-7 pr-20">
-           <button onClick={() => setupper("problem")}> Problem</button>
-           <button onClick={() => setupper("solution")}>Solution</button>
-           <button onClick={() => setupper("submissions")}>Submissions</button>
-           <button onClick={() => setupper("discuss")}>Discuss</button>
-           <button onClick={() => setupper("aski")}>Ask Ai</button>
+         <div className="flex gap-8 items-center shadow-lg justify-between bg-gray-100 py-3.5 px-7 pr-20 text-black ">
+           <button onClick={() => setupper("problem")} className="cursor-pointer font-semibold hover:text-blue-500"> Problem</button>
+           <button onClick={() => setupper("solution")} className="cursor-pointer font-semibold hover:text-blue-500">Solution</button>
+           <button onClick={() => setupper("submissions")} className="cursor-pointer font-semibold hover:text-blue-500">Submissions</button>
+           <button onClick={() => setupper("discuss")} className="cursor-pointer font-semibold hover:text-blue-500">Discuss</button>
+           <button onClick={() => setupper("aski")} className="cursor-pointer font-semibold hover:text-blue-500">Ask Ai</button>
          </div>
 
        {/* Problem */}
@@ -175,13 +175,13 @@ const toPlainText = (data) => {
         </p>
 
         <p className="mt-5 mb-3 font-bold">Examples:</p>
-      <div className="bg-gray-100 text-black p-2">
+      <div className="bg-gray-200/75 text-black p-2 shadow-md">
         <p><span >Input:</span> {problems?.visibleTestCases[0].sinput || problems?.visibleTestCases[0].input}</p>
         <p><span >Output:</span> {problems?.visibleTestCases[0].output}</p>
         <p><span >Explanation:</span>  { problems?.visibleTestCases[0].explanation } </p>
       </div>
        <h4 className="my-5"></h4>
-      <div className="bg-gray-100 text-black p-2">
+      <div className="bg-gray-200/75 text-black p-2 shadow-md">
         <p><span >Input:</span> {problems?.visibleTestCases[1].sinput || problems?.visibleTestCases[1].input}</p>
         <p><span >Output:</span> {problems?.visibleTestCases[1].output}</p>
         <p><span >Explanation:</span> { problems?.visibleTestCases[1].explanation } </p>
@@ -205,7 +205,7 @@ const toPlainText = (data) => {
       {showTags && problems && (
         <div className="flex flex-wrap gap-3" style={{ marginTop: "10px" }}>
            {problems.tags.map((t, index) => (
-          <span className="px-4 rounded-2xl bg-white text-xs  text-black py-2" key={index}>{t }</span>
+          <span className="px-4 rounded-2xl bg-gray-200/85 text-xs  text-black py-2" key={index}>{t }</span>
           ))}
         </div>
       )}
@@ -285,7 +285,7 @@ const toPlainText = (data) => {
         <div className="flex justify-between">
       
 
-        <div className="text-lg rounded " style={{ padding: "10px", borderBottom: "1px solid #ccc",  }} >
+        <div className="text-lg rounded " style={{ padding: "9px", borderBottom: "1px solid #ccc",  }} >
           <select  className="bg-white text-black p-1.5 py-1" value={language} onChange={(e) => setLanguage(e.target.value)}>
             <option value="cpp" clas>C++</option>
             <option value="python">Python</option>

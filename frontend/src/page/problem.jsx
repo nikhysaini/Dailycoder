@@ -99,7 +99,7 @@ export default function Problem() {
         <div className="mt-1"></div>
         <tbody >
           {filteredProblems?.map((p) => (
-            <tr key={p.id} className="rounded-lg grid grid-cols-3 text-center border-gray-100 bg-white border-3 border-gray-100 ">
+            <tr key={p.id} className="rounded-lg grid grid-cols-3 text-center border-gray-100 bg-white border-3 border-gray-100 hover:bg-black/8">
               
               <td className="p-3 text-black  font-bold text-center cursor-pointer  hover:text-green-500" onClick={() => {navigate(`/solve/${p._id}`)}}>
                   {p.title}

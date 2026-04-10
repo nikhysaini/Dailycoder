@@ -77,7 +77,7 @@ export default function Profile() {
         <FaCheckCircle color="green" size={20} className="mt-1 ml-0.5" />
        </div>
         <p className="text-lg mt-0.5 rounded-lg p-2 py-1.5 mt-1 w-fit">{user.about}</p>
-        <button onClick={ () => navigate("/editprofile")} className=" text-center text-lg cursor-pointer  items-center  font-semibold bg-blue-600 text-white rounded-lg px-6 py-2 mt-6">Edit Profile</button>
+        <div className="text-center"><button onClick={ () => navigate("/editprofile")} className=" text-center text-lg cursor-pointer  items-center  font-semibold bg-blue-600 text-white rounded-lg px-6 py-2 mt-6">Edit Profile</button></div>
      </div>
      <div className="">
        <div className="grid lg:grid-cols-3 md:grid-cols-1 sm:grid-cols-1 gap-3">

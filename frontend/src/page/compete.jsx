@@ -76,7 +76,6 @@ export default function Compete() {
         roomId, 
         user: auth?.email 
         });
-        
       }
    });
   
@@ -298,12 +297,12 @@ export default function Compete() {
 
   return (  <>
     {!loading && 
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
      
       {!joined && auth != null && 
       <div className=" py-[10%] grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 w-[80%] place-items-center gap-8 lg:gap-5 mx-auto">
        
-       <div className="shadow-lg rounded-lg text-center bg-gray-200/20 hover:bg-white/60 min-h-95 min-w-80">
+       <div className="shadow-lg rounded-lg text-center bg-gray-200/20 hover:bg-white/60 min-h-95 min-w-80 hover:m-0">
        <p className="text-3xl mt-15 font-mono font-semibold text-blue-500">Join Contest</p>
        <div className="text-black w-[58%] mx-auto text-sm mt-7">
         <p>Join ongoing contest or with your friends</p>
@@ -317,7 +316,7 @@ export default function Compete() {
       <button className="mt-8 text-center bg-green-600 mt-3 p-3 py-1.5 pointer-courser rounded" onClick={joinRoom}>Join Contest</button>
        </div>
  
-       <div className="shadow-lg rounded-lg text-center bg-gray-200/20 hover:bg-white/60 min-h-95 min-w-80 ">
+       <div className="shadow-lg rounded-lg text-center bg-gray-200/20 hover:bg-white/60 min-h-95 min-w-80">
       <p className="text-3xl mt-15 font-mono font-semibold text-blue-500">Create Contest</p>
       <div className="mt-10">
       <input className="bg-gray-300 text-black mt-2.5 p-2 py-1.5 rounded"
@@ -375,13 +374,13 @@ export default function Compete() {
          <div style={{ display: "flex", height: "100vh" }}>
 
       {/* Left Panel - Problem */} 
-
+     
        {/* Tab */} 
-      <div className="overflow-auto w-[45%] " >
-         <div className="flex gap-8 items-center justify-between cursor-pointer bg-gray-800 rounded-md py-3 px-7 pr-20">
-           <button onClick={() => setupper("problem")}> Problem</button>
-           <span className="">Contest Id: {roomId}</span>
-           <button className="bg-red-600  p-1.5 rounded flex items-center gap-1" onClick={leaveRoom}>
+      <div className="overflow-auto w-[45%]">
+         <div className="flex gap-8 items-center justify-between cursor-pointer shadow-lg bg-gray-100 py-2 px-7 pr-20 text-black">
+           <button onClick={() => setupper("problem")} className="cursor-pointer font-semibold hover:text-blue-500"> Problem</button>
+           <span className="cursor-pointer font-semibold hover:text-blue-500">Contest Id: {roomId}</span>
+           <button className="bg-red-600  p-1.5 rounded flex items-center gap-1 cursor-pointer font-semibold hover:text-white hover:text-md" onClick={leaveRoom}>
             <FiLogOut size={20} className="text-center"/>
             <span className="text-center">Leave</span>
             </button>
@@ -404,13 +403,13 @@ export default function Compete() {
         </p>
 
         <p className="mt-5 mb-3 font-bold">Examples:</p>
-      <div className="bg-gray-100 text-black p-2">
+      <div className="bg-gray-200/75 text-black p-2 shadow-md">
         <p><span >Input:</span> {problems?.visibleTestCases[0].input}</p>
         <p><span >Output:</span>{problems?.visibleTestCases[0].output}</p>
         <p><span >Explanation:</span>  { problems?.visibleTestCases[0].explanation } </p>
       </div>
        <h4 className="my-5"></h4>
-      <div className="bg-gray-100 text-black p-2">
+      <div className="bg-gray-200/75 text-black p-2 shadow-md">
         <p><span >Input:</span>{problems?.visibleTestCases[1].input} </p>
         <p><span >Output:</span> {problems?.visibleTestCases[1].output}</p>
         <p><span >Explanation:</span> { problems?.visibleTestCases[1].explanation } </p>
@@ -430,7 +429,7 @@ export default function Compete() {
       {showTags && problems && (
         <div className="flex flex-wrap gap-3" style={{ marginTop: "10px" }}>
            {problems.tags.map((t, index) => (
-          <span className="px-4 rounded-2xl bg-white text-xs  text-black py-2" key={index}>{t }</span>
+          <span className="px-4 rounded-2xl bg-gray-200/70 text-xs  text-black py-2" key={index}>{t }</span>
           ))}
         </div>
       )}
@@ -508,7 +507,7 @@ export default function Compete() {
 
       {/* Right Panel - Code Editor */}
       <div className="overflow-auto" style={{  width: "55%", display: "flex", flexDirection: "column"  }} >
-        <div className="flex justify-between">
+        <div className="flex justify-between shadow-lg bg-gray-200">
       
 
         <div className="text-lg rounded " style={{ padding: "10px", borderBottom: "1px solid #ccc",  }} >
