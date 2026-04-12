@@ -86,14 +86,13 @@ export default function AdminCreate() {
         Create a problem
       </h1>
  <form className="w-[80%] mx-auto text-center flex flex-col gap-3 bg-white">
-      
-      <p className="mt-4 ">Title</p>
+      <p className="mt-4">Title</p>
       <input
         type="text"
         name="title"
         placeholder="Problem Title"
         className="border p-2 rounded bg-gray-100 "
-        required
+        value= {problem.title}
         onChange={(e) =>
              setProblem({ ...problem,title: e.target.value
          })}
@@ -104,6 +103,7 @@ export default function AdminCreate() {
         name="description"
         placeholder="Problem Description"
         className="border p-2 rounded bg-gray-100"
+        value= {problem.description}
         onChange={(e) =>
              setProblem({ ...problem,description:e.target.value
          })}
@@ -113,6 +113,7 @@ export default function AdminCreate() {
       <select
         name="difficulty"
         className="border p-2 rounded bg-gray-100"
+        value= {problem.difficulty}
        onChange={(e) =>
              setProblem({ ...problem,difficulty:e.target.value
          })}
