@@ -61,11 +61,9 @@ const problemSchema = new mongoose.Schema({
         {
             language:{
                 type:String,
-                required:true,
             },
             initialCode:{
                 type:String,
-                required:true
             }
         }
     ],
