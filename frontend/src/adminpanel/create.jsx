@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate} from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 export default function AdminCreate() {
   const auth = JSON.parse(localStorage.getItem("auth"))||null;
+  const [loading, setLoading] = useState(null);
   const [addtc,setaddtc] = useState({input:"" , output:"" })
   const [problem,setProblem] = useState({
   title:null,
@@ -62,6 +64,7 @@ export default function AdminCreate() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    setLoading("Loading");
     const tg = problem.tags.split(",") , ct = problem.constraints.split(",");
     const tocreate = {...problem,tags:tg,constraints:ct};
     console.log(tocreate); 
@@ -78,11 +81,13 @@ export default function AdminCreate() {
          credentials: "include"
       });
       console.log(response);
+      setLoading(null);
       alert("Create successfully")
      }
      api();
   }
  return ( <>
+ {loading===null && <div>
  <h1 className=" text-blue-500  p-2 text-center text-3xl font-semibold mt-4 ">
         Create a problem
       </h1>
@@ -207,7 +212,17 @@ export default function AdminCreate() {
       </button>
 
     </form>
- 
+   </div> }
+
+    {loading != null && (
+      <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+       
+        <div className="flex flex-col items-center gap-3">
+         <ClipLoader size={42} color="#3b82f6" />
+         <p>{loading}</p>
+        </div>
+     </div>
+      )}
 
  </>);
 
