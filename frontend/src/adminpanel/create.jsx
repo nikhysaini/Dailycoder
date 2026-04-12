@@ -54,17 +54,17 @@ export default function AdminCreate() {
       api();
   }
  return ( <>
- <h1 className=" text-blue-500  p-2 text-center text-3xl font-semibold mt-4 border-1 border-gray-900">
+ <h1 className=" text-blue-500  p-2 text-center text-3xl font-semibold mt-4 ">
         Create a problem
       </h1>
- <form className="w-[80%] mx-auto text-center flex flex-col gap-3" onSubmit={handleSubmit}>
+ <form className="w-[80%] mx-auto text-center flex flex-col gap-3 bg-white" onSubmit={handleSubmit}>
       
       <p className="mt-4 ">Title</p>
       <input
         type="text"
         name="title"
         placeholder="Problem Title"
-        className="border p-2 rounded bg-gray-800 "
+        className="border p-2 rounded bg-gray-100 "
         onChange={handleChange}
       />
        
@@ -72,14 +72,14 @@ export default function AdminCreate() {
       <textarea
         name="description"
         placeholder="Problem Description"
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-100"
         onChange={handleChange}
       />
       
       <p  className="mt-4">Difficulty</p>
       <select
         name="difficulty"
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-100"
         onChange={handleChange}
       >
         <option value="">Select Difficulty</option>
@@ -93,7 +93,7 @@ export default function AdminCreate() {
         type="text"
         name="tags"
         placeholder="Tags (array, dp, graph)"
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-100"
         onChange={handleChange}
       />
        
@@ -101,7 +101,7 @@ export default function AdminCreate() {
       <textarea
         name="constraints"
         placeholder="Sample Input"
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-100"
         onChange={handleChange}
       />
      
@@ -110,7 +110,7 @@ export default function AdminCreate() {
         name="VisibleTescase"
         rows="8"
         placeholder="Sample Output"
-        className="border p-2 rounded bg-gray-800 big-textarea"
+        className="border p-2 rounded bg-gray-100 big-textarea"
         onChange={handleChange}
       />
       
@@ -119,7 +119,7 @@ export default function AdminCreate() {
         name="HiddenTescase"
         rows="10"
         placeholder="Sample Output"
-        className="border p-2 rounded bg-gray-800 "
+        className="border p-2 rounded bg-gray-100 "
         onChange={handleChange}
       />
 
@@ -128,7 +128,7 @@ export default function AdminCreate() {
         name="solution"
         rows="10"
         placeholder="solution code"
-        className="border p-2 rounded bg-gray-800 "
+        className="border p-2 rounded bg-gray-100 "
         onChange={handleChange}
       />
 

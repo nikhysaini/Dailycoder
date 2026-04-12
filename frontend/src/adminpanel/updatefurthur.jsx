@@ -75,7 +75,7 @@ const { name, value } = e.target;
 
   }
  return ( <>
- <h1 className=" text-blue-500  p-2 text-center text-3xl font-semibold mt-4 border-1 border-gray-900">
+ <h1 className=" text-blue-500  p-2 text-center text-3xl font-semibold mt-4">
         Update a problem
       </h1>
  {problem!=null && <form className="w-[80%] mx-auto text-center flex flex-col gap-3" onSubmit={handleSubmit}>
@@ -85,7 +85,7 @@ const { name, value } = e.target;
         type="text"
         name="title"
         value={`${problem.title}`}
-        className="border p-2 rounded bg-gray-800 "
+        className="border p-2 rounded bg-gray-100 "
         onChange={handleChange}
       />
        
@@ -94,7 +94,7 @@ const { name, value } = e.target;
         name="description"
         placeholder="Problem Description"
         value={`${problem.description}`}
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-100"
         onChange={handleChange}
       />
       
@@ -102,7 +102,7 @@ const { name, value } = e.target;
       <select
         name="difficulty"
         value={`${problem.difficulty}`}
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-100"
         onChange={handleChange}
       >
         <option value="Easy">Easy</option>
@@ -116,7 +116,7 @@ const { name, value } = e.target;
         name="tags"
         value={`${problem.tags}`}
         placeholder="Tags (array, dp, graph)"
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-100"
         onChange={handleChange}
       />
        
@@ -124,7 +124,7 @@ const { name, value } = e.target;
       <textarea
         name="constraints"
         placeholder="Sample Input"
-        className="border p-2 rounded bg-gray-800"
+        className="border p-2 rounded bg-gray-100"
         onChange={handleChange}
       />
      
@@ -136,7 +136,7 @@ const { name, value } = e.target;
       name="input"
       value={tc.input}
       placeholder="Sample Input"
-      className="border p-2 rounded bg-gray-800"
+      className="border p-2 rounded bg-gray-100"
       onChange={(e) => handleTestcaseChange(e, index)}
     />
 
@@ -144,7 +144,7 @@ const { name, value } = e.target;
       name="output"
       value={tc.output}
       placeholder="Sample Output"
-      className="border p-2 rounded bg-gray-800"
+      className="border p-2 rounded bg-gray-100"
       onChange={(e) => handleTestcaseChange(e, index)}
     />
 
@@ -159,7 +159,7 @@ const { name, value } = e.target;
       name="input"
       value={tc.input}
       placeholder="Sample Input"
-      className="border p-2 rounded bg-gray-800"
+      className="border p-2 rounded bg-gray-100"
       onChange={(e) => handlehiddenTestcaseChange(e, index)}
      />
 
@@ -167,7 +167,7 @@ const { name, value } = e.target;
       name="output"
       value={tc.output}
       placeholder="Sample Output"
-      className="border p-2 rounded bg-gray-800"
+      className="border p-2 rounded bg-gray-100"
       onChange={(e) => handlehiddenTestcaseChange(e, index)}
      />
 
