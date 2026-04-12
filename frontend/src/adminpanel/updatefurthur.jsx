@@ -1,17 +1,21 @@
 import React, { useState,useEffect } from "react";
 import { useNavigate,useParams } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 export default function AdminUpdateFurther() {
+  const [loading, setLoading] = useState(null);
   const { id } = useParams();
   const [addtc,setaddtc] = useState({input:"" , output:"" })
   const [problem,setProblem] = useState(null)
 
    useEffect(() => { 
+    setLoading("Loading");
     async function api() {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${"698f6f74ce0bdfd0c9616a72"}`,{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${id}`,{
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+           "Content-Type": "application/json",
+           "token":auth.token
         },
          credentials: "include"
       });
@@ -22,6 +26,7 @@ export default function AdminUpdateFurther() {
       })
       console.log(data);
       console.log(problem);
+      setLoading(null);
      }
       api();
 
@@ -42,10 +47,11 @@ export default function AdminUpdateFurther() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    setLoading("Loading");
     const tg = problem.tags.split(",") , ct = problem.constraints.split(",");
     const tocreate = {...problem,tags:tg,constraints:ct};
      async function api() {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/update/${"698f6f74ce0bdfd0c9616a72"}`,{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/update/${id}`,{
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -57,11 +63,13 @@ export default function AdminUpdateFurther() {
       });
       console.log(response);
       alert("update successfully")
+      setLoading(null);
      }
       api();
 
   }
- return ( <>
+ return (<>
+  {loading===null && <div>
  <h1 className=" text-blue-500  p-2 text-center text-3xl font-semibold mt-4">
         Update a problem
       </h1>
@@ -186,8 +194,16 @@ export default function AdminUpdateFurther() {
       </button>
 
     </form>}
- 
-
+ </div>}
+ {loading != null && (
+   <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+    
+     <div className="flex flex-col items-center gap-3">
+      <ClipLoader size={42} color="#3b82f6" />
+      <p>{loading}</p>
+     </div>
+  </div>
+   )}
  </>);
 
 }

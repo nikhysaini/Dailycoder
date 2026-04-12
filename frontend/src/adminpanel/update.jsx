@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { Outlet , useNavigate} from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 export default function AdminUpdate() {
+const auth = JSON.parse(localStorage.getItem("auth"))||null;
+const [loading, setLoading] = useState(null);
 const navigate = useNavigate();
 const [search, setSearch] = useState("");
-  const problems = [
+  const [problems, setproblem] = useState([]);
+  const problem = [
     { id: 1, title: "Two Sum", difficulty: "Easy", tags: ["Array","HashMap"] },
     { id: 2, title: "Longest Substring", difficulty: "Medium", tags: ["String","Sliding Window"] },
     { id: 3, title: "Merge K Lists", difficulty: "Hard", tags: ["LinkedList","Heap"] },
@@ -14,10 +18,26 @@ const [search, setSearch] = useState("");
   const filteredProblems = problems.filter((p) =>
   p.title.toLowerCase().includes(search.toLowerCase())
   );
-
-  return (
+  useEffect(() => { 
+      setLoading("Loading");
+      async function api() {
+          const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/getAllProblem`,{
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+           credentials: "include"
+        });
+        const data = await response.json();
+        setproblem(data);
+        setLoading(null);
+        console.log(problems);
+       }
+        api();
+      },[]);
+  return (<>
     
-    <div className="lg:p-8 md:p-6 sm:p-2">
+    {loading===null && <div className="lg:p-8 md:p-6 sm:p-2">
 
       <h1 className="lg:w-[84%] md:w-[90%]  text-blue-500 text-center text-2xl font-semibold mb-6">
         Delete any problem
@@ -46,7 +66,7 @@ const [search, setSearch] = useState("");
             <tr key={p.id} className="border-t bg-gray-800 border-2 border-gray-900 ">
               
               
-              <td className="p-3 text-white font-bold cursor-pointer items-center hover:text-green-500" onClick={() => {navigate(`/solve/${p.id}`)}}>
+              <td className="p-3 text-white font-bold cursor-pointer items-center hover:text-green-500" onClick={() => {navigate(`/solve/${p._id}`)}}>
                   {p.title}
               </td>
 
@@ -61,7 +81,7 @@ const [search, setSearch] = useState("");
               </td>
               
                <td className="p-3">
-                 <button onClick={() => {navigate(`${p.id}`)}} className="bg-yellow-600 px-3 py-1 rounded cursor-pointer hover:bg-yellow-800">Update</button>
+                 <button onClick={() => {navigate(`${p._id}`)}} className="bg-yellow-600 px-3 py-1 rounded cursor-pointer hover:bg-yellow-800">Update</button>
                 </td> 
             </tr>
           ))}
@@ -69,7 +89,16 @@ const [search, setSearch] = useState("");
 
       </table> 
 
-    </div>
-  );
+    </div>}
+    {loading != null && (
+   <div className="grid place-items-center min-h-screen text-xl pr-2 pb-20">
+    
+     <div className="flex flex-col items-center gap-3">
+      <ClipLoader size={42} color="#3b82f6" />
+      <p>{loading}</p>
+     </div>
+  </div>
+   )}
+  </>);
 
 }
