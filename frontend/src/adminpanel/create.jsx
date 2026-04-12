@@ -72,14 +72,14 @@ export default function AdminCreate() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-        ...problem
+        ...tocreate
       }),
          credentials: "include"
       });
       console.log(response);
       alert("update successfully")
      }
-      //api();
+     api();
   }
  return ( <>
  <h1 className=" text-blue-500  p-2 text-center text-3xl font-semibold mt-4 ">
