@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate} from "react-router-dom";
 
 export default function AdminCreate() {
+  const auth = JSON.parse(localStorage.getItem("auth"))||null;
   const [addtc,setaddtc] = useState({input:"" , output:"" })
   const [problem,setProblem] = useState({
   title:null,
@@ -69,6 +70,7 @@ export default function AdminCreate() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "token":auth.token
         },
         body: JSON.stringify({
         ...tocreate
