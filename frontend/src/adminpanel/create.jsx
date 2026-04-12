@@ -2,41 +2,69 @@ import React, { useState } from "react";
 import { useNavigate} from "react-router-dom";
 
 export default function AdminCreate() {
+  const [addtc,setaddtc] = useState({input:"" , output:"" })
   const [problem,setProblem] = useState({
   title:null,
-  difficulty:null,
-  tags:null,
-  constraints:null,
-  VisibleTescase:null,
-  HiddenTescase:null,
-  solution:[
+  difficulty:"Easy",
+  description:null,
+  tags:"Array,Dp",
+  constraints:"1<=n<=1e5 , 1<=arr[i]<=1e9",
+  visibleTestCases:[
+    { sinput:"arr =[1,2,5] , k = 5",
+      input: "1 2 5 5",
+      output: "5",
+      explanation: "2 + 3 equals 5"
+    },
+    { sinput:"arr =[6,1,5] , k = 2",
+      input: "6 1 5 2",
+      output: "4",
+      explanation: "-1 + 5 equals 4"
+    }
+  ],
+  hiddenTestCases:[
+        {
+            "input": "10 20",
+            "output": "30"
+        },
+        {
+            "input": "100 250",
+            "output": "350"
+        }
+    ],
+  "referenceSolution": [
         {
             "language": "C++",
-            "completeCode": ""
+            "completeCode": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b;\n    return 0;\n}"
         },
         {
             "language": "Java",
-            "completeCode": ""
-        },
-        {
-            "language": "JavaScript",
-            "completeCode": ""
+            "completeCode": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int a = sc.nextInt();\n        int b = sc.nextInt();\n        System.out.println(a + b);\n    }\n}"
         },
         {
             "language": "Python",
             "completeCode": ""
         }
-    ],
+    ]
   })
-  const handleChange = (e) => {
-    setProblem({
-      ...problem,
-      [e.target.name]: e.target.value
-    })
-    console.log(e.target.value)
-  }
+  const addHiddenTestcase = (e) => {
+  e.preventDefault();
+  console.log(addtc);
+  console.log(problem);
+  setProblem({
+    ...problem,
+    hiddenTestCases: [
+      ...problem.hiddenTestCases,
+      addtc
+    ]
+  });
+};
+
   const handleSubmit = async(e) => {
-   console.log(problem); 
+    e.preventDefault();
+    const tg = problem.tags.split(",") , ct = problem.constraints.split(",");
+    console.log(tg,ct)
+    const tocreate = {...problem,tags:tg,constraints:ct};
+    console.log(tocreate); 
    async function api() {
         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/create`,{
         method: "POST",
@@ -51,13 +79,13 @@ export default function AdminCreate() {
       console.log(response);
       alert("update successfully")
      }
-      api();
+      //api();
   }
  return ( <>
  <h1 className=" text-blue-500  p-2 text-center text-3xl font-semibold mt-4 ">
         Create a problem
       </h1>
- <form className="w-[80%] mx-auto text-center flex flex-col gap-3 bg-white" onSubmit={handleSubmit}>
+ <form className="w-[80%] mx-auto text-center flex flex-col gap-3 bg-white">
       
       <p className="mt-4 ">Title</p>
       <input
@@ -65,7 +93,10 @@ export default function AdminCreate() {
         name="title"
         placeholder="Problem Title"
         className="border p-2 rounded bg-gray-100 "
-        onChange={handleChange}
+        required
+        onChange={(e) =>
+             setProblem({ ...problem,title: e.target.value
+         })}
       />
        
      <p className="mt-4">Description</p>
@@ -73,16 +104,19 @@ export default function AdminCreate() {
         name="description"
         placeholder="Problem Description"
         className="border p-2 rounded bg-gray-100"
-        onChange={handleChange}
+        onChange={(e) =>
+             setProblem({ ...problem,description:e.target.value
+         })}
       />
       
       <p  className="mt-4">Difficulty</p>
       <select
         name="difficulty"
         className="border p-2 rounded bg-gray-100"
-        onChange={handleChange}
+       onChange={(e) =>
+             setProblem({ ...problem,difficulty:e.target.value
+         })}
       >
-        <option value="">Select Difficulty</option>
         <option value="Easy">Easy</option>
         <option value="Medium">Medium</option>
         <option value="Hard">Hard</option>
@@ -92,47 +126,81 @@ export default function AdminCreate() {
       <input
         type="text"
         name="tags"
-        placeholder="Tags (array, dp, graph)"
-        className="border p-2 rounded bg-gray-100"
-        onChange={handleChange}
+        className="border p-2 rounded bg-gray-100 "
+        value = {problem.tags}
+        onChange={(e) => {
+            setProblem({...problem,tags:e.target.value});
+        }}
       />
        
       <p  className="mt-4">Constraints</p>
-      <textarea
+      <input
+        rows={5}
+        cols={50}
         name="constraints"
         placeholder="Sample Input"
         className="border p-2 rounded bg-gray-100"
-        onChange={handleChange}
+        value = {problem.constraints}
+        onChange={(e) => {
+            setProblem({...problem,constraints:e.target.value});
+        }}
       />
      
       <p  className="mt-4">Visible Tescase</p>
-      <textarea
-        name="VisibleTescase"
-        rows="8"
-        placeholder="Sample Output"
-        className="border p-2 rounded bg-gray-100 big-textarea"
-        onChange={handleChange}
+     <textarea
+        rows={14}
+        cols={50}
+        placeholder="Sample input"
+        className="border p-2 rounded bg-gray-100 "
+        value={JSON.stringify(problem.visibleTestCases , null, 2)}
+        onChange={(e) => {
+          try {
+            setProblem({...problem,visibleTestCases:JSON.parse(e.target.value)});
+          } catch (err) {
+          }
+        }}
       />
       
      <p  className="mt-4">Hidden Tescase</p>
       <textarea
-        name="HiddenTescase"
-        rows="10"
+        rows={15}
+        cols={50}
         placeholder="Sample Output"
         className="border p-2 rounded bg-gray-100 "
-        onChange={handleChange}
+        value={JSON.stringify(problem.hiddenTestCases , null, 2)}
+        onChange={(e) => {
+          try {
+            setProblem({...problem,hiddenTestCases:JSON.parse(e.target.value)});
+          } catch (err) {
+          }
+        }}
       />
+      
+      <div className="grid grid-cols-1 gap-2 border-2 border-black/80">
+      <p className="text-xl text-green-400 m-1">Add New tescase</p>
+      <input className="bg-gray-100 m-1 p-1" placeholder="input" value={addtc.input}
+        onChange={(e)=>{setaddtc({...addtc,input:e.target.value})}}></input>
+      <input className="bg-gray-100 m-1 p-1" placeholder="output " value={addtc.output}
+        onChange={(e)=>{setaddtc({...addtc,output:e.target.value})}}></input>
+      <button className="bg-green-500 m-1" onClick={addHiddenTestcase}>Add</button>
+      </div>
 
-      <p  className="mt-4">Reference solution</p>
+      <p className="mt-4">Reference solution</p>
       <textarea
         name="solution"
         rows="10"
         placeholder="solution code"
         className="border p-2 rounded bg-gray-100 "
-        onChange={handleChange}
+        value={JSON.stringify(problem.referenceSolution , null, 2)}
+        onChange={(e) => {
+          try {
+            setProblem({...problem,referenceSolution:JSON.parse(e.target.value)});
+          } catch (err) {
+          }
+        }}
       />
 
-      <button className="bg-blue-500 text-white p-2 rounded my-6 mb-10">
+      <button onClick={handleSubmit} className="bg-blue-500 text-white p-2 rounded my-6 mb-10">
         Create Problem
       </button>
 
