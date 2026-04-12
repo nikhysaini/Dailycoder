@@ -62,7 +62,6 @@ export default function AdminCreate() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const tg = problem.tags.split(",") , ct = problem.constraints.split(",");
-    console.log(tg,ct)
     const tocreate = {...problem,tags:tg,constraints:ct};
     console.log(tocreate); 
    async function api() {
@@ -77,7 +76,7 @@ export default function AdminCreate() {
          credentials: "include"
       });
       console.log(response);
-      alert("update successfully")
+      alert("Create successfully")
      }
      api();
   }

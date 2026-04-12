@@ -55,7 +55,6 @@ export default function AdminUpdateFurther() {
       }),
          credentials: "include"
       });
-      
       console.log(response);
       alert("update successfully")
      }
