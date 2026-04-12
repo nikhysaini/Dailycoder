@@ -40,7 +40,7 @@ const {title,description,difficulty,tags,constraints,
        }
     
     }
-   const {token} = req.cookies;
+   const token = req.headers.token;
    const payload = jwt.verify(token,process.env.JWT_TOKEN_KEY)
    const users = await user.findOne({email:payload.email})
    const count = await Problem.countDocuments({});
