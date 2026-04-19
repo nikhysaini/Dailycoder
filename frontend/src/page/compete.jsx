@@ -16,7 +16,7 @@ export default function Compete() {
   const [loading, setLoading] = useState(null);
   const [roomId, setRoomId] = useState("");
   const [problemtitle, setproblemtitle] = useState(null);
-  const [problemId, setproblemId] = useState(null);
+  const [problemId, setproblemId] = useState(`698f6f74ce0bdfd0c9616a72`);
   const [contesttime, setcontesttime] = useState(null);
   const [roommenu, setroommenu] = useState("join");
   const [joined, setJoined] = useState(false);
@@ -176,7 +176,7 @@ export default function Compete() {
   useEffect(() => { 
       setLoading("Loading");
     async function api() {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${problemId}`,{
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/problem/problemById/${`698f6f74ce0bdfd0c9616a72`}`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -199,7 +199,7 @@ export default function Compete() {
         if(language==="python") lang = "Python";
         else if(language==="javascript") lang = "Javascript";
         else if(language==="java") lang = "Java";
-       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/run/${problemId}`, {
+       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/run/${`698f6f74ce0bdfd0c9616a72`}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -240,7 +240,7 @@ export default function Compete() {
         if(language==="python") lang = "Python";
         else if(language==="javascript") lang = "Javascript";
         else if(language==="java") lang = "Java";
-       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/submit/${problemId}`, {
+       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/submission/submit/${`698f6f74ce0bdfd0c9616a72`}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
