@@ -64,8 +64,6 @@ const logout = async(req,res)=>{
      const verify = jwt.verify(token,process.env.JWT_TOKEN_KEY);
      if(token && verify)
      {
-      await redisclient.set(`token:${token}`,`expire`)
-      await redisclient.expireAt(`token:${token}`,verify.exp)
       res.clearCookie("token");
       res.status(200).json({"message":"Logout successfully"})
      }
