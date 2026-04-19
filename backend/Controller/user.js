@@ -61,8 +61,7 @@ const login = async(req,res)=>{
 const logout = async(req,res)=>{
     try{
      const token = req.headers.token;
-     const verify = jwt.verify(token,process.env.JWT_TOKEN_KEY);
-     if(token && verify)
+     if(token)
      {
       res.clearCookie("token");
       res.status(200).json({"message":"Logout successfully"})
