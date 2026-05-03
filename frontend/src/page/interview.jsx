@@ -17,8 +17,35 @@ export default function Interview() {
 
   const questions = [
     "Welcome to the interview.Tell me about yourself",
-    "Why do you want to work with our company?",
-    "Tell me about a difficult technical challenge you solved."
+    "What is a Load Balancer, what happens if it fails, and how do systems handle that failure ?",
+    "What is a Reverse Proxy and how is it different from a Forward Proxy?",
+    "Explain Horizontal vs Vertical Scaling.",
+    "What is Caching and why do we use tools like Redis?",
+    "What is CAP Theorem?",
+    "What is High Availability and how is it different from Fault Tolerance?",
+    "What is Database Sharding and what problems does it solve?",
+    "If traffic suddenly spikes 10x, how does the system handle the load without crashing?",
+    "What is an API Gateway and how is it different from a Load Balancer?",
+    "If too many requests hit an API, how does the system prevent overload?",
+    "What is Rate Limiting and why is it important?",
+    "What is Microservices Architecture and what challenges does it introduce?",
+    "What is the difference between High-Level Design (HLD) and Low-Level Design (LLD)?",
+    "What is eventual consistency and how is it different from strong consistency?",
+    "What is DNS and how does DNS resolution work?",
+    "What is the difference between HTTP and HTTPS?",
+    "What are retries, timeouts, and circuit breakers in distributed systems?",
+    "What is data replication and how does it improve availability?",
+    "What happens when you type a URL in a browser?",
+    "Explain TCP vs UDP.",
+    "What is event-driven architecture and how is it different from request-response?",
+    "What is the difference between SQL and NoSQL databases?",
+    "What is a message queue and why do systems use tools like Apache Kafka?",
+    "What are Indexes and why are they used?",
+    "What is Normalization?",
+    "What are ACID properties?",
+    "Explain the four pillars of OOP.",
+    "What is the difference between Process and Thread?",
+    "What is Deadlock?",
   ];
 
   const speakQuestion = (text) => {
